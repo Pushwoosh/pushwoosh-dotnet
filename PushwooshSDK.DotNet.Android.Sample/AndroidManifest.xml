@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.pushwoosh.demoapp">
+	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true">
+		<meta-data android:name="com.pushwoosh.appid" android:value="11C10-EF18D" />
+		<meta-data android:name="com.pushwoosh.senderid" android:value="@string/fcm_sender_id" />
+    </application>
+		<uses-permission android:name="android.permission.INTERNET" />
+	<uses-sdk />
+</manifest>

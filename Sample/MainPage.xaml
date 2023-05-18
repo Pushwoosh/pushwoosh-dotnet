@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sample.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="120"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Welcome to .NET Multi-platform App UI"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="16"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="RegisterBtn"
+                Text="Subscribe for push notifications"
+                SemanticProperties.Hint="Click to subscribe for push notifications"
+                Clicked="OnRegisterClicked"
+                HorizontalOptions="Center" />
+            <Entry
+                x:Name="UserIdInput"
+                Placeholder="Enter your User ID"
+                ReturnType="Send"
+                Completed="OnUserIdInput"/>
+            <Button
+                x:Name="PostEventBtn"
+                Text="Post Test Event"
+                SemanticProperties.Hint="Click to send 'test' event"
+                Clicked="OnPostEventClicked"
+                HorizontalOptions="Center" />
+            <Entry
+                x:Name="TagNameEntry"
+                Placeholder="Specify tag name you want to send"
+                ReturnType="Done"
+                Completed="OnTagNameInput" />
+            <Entry
+                x:Name="TagValueEntry"
+                Placeholder="Set string value to be sent"
+                ReturnType="Done"
+                Completed="OnTagValueInput" />
+            <Button
+                x:Name="SetTagsBtn"
+                Text="Send Tag to Pushwoosh"
+                Clicked="OnSetTagsClicked"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
+

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1705.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushwooshSDK.DotNet.Android.Bindings", "PushwooshSDK.DotNet.Android.Bindings.csproj", "{86677A84-A102-4E1E-8062-6D1DF83DB836}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86677A84-A102-4E1E-8062-6D1DF83DB836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86677A84-A102-4E1E-8062-6D1DF83DB836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86677A84-A102-4E1E-8062-6D1DF83DB836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86677A84-A102-4E1E-8062-6D1DF83DB836}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C8FF964-AB4F-4EBE-8CAE-49F6E1185194}
+	EndGlobalSection
+EndGlobal

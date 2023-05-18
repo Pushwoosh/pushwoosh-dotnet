@@ -1,0 +1,7 @@
+﻿<resources>
+    <string name="app_name">PushwooshSDK.DotNet.Android.Sample</string>
+    <string name="app_text">Hello, Android!</string>
+    <string name="fcm_sender_id">562785984945</string>
+</resources>
+
+
