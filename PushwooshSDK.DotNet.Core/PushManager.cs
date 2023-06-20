@@ -39,7 +39,7 @@ namespace PushwooshSDK.DotNet.Core
         /// <summary>
         /// Pushwoosh application code
         /// </summary>
-        public abstract string AppCode { get; }
+        public abstract string AppCode { get; set; }
 		/// <summary>
 		/// Unique device identifier that used in all API calls with Pushwoosh.
 		/// </summary>

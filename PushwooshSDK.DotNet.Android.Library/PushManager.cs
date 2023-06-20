@@ -86,7 +86,17 @@ namespace Pushwoosh.Android
             }
         }
 
-        public override string AppCode => nativeManager.AppId;
+        public override string AppCode
+        {
+            get
+            {
+                return nativeManager.AppId;
+            }
+            set
+            {
+                nativeManager.AppId = value;
+            }
+        }
 
         public override string HardwareId => nativeManager.Hwid;
 
