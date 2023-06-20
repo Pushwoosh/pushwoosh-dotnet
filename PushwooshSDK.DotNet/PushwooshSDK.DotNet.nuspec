@@ -2,12 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Pushwoosh.DotNet</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <title>Pushwoosh .Net SDK</title>
         <authors>Pushwoosh</authors>
         <owners>Pushwoosh</owners>
         <licenseUrl>https://github.com/Pushwoosh/push-notifications-sdk/blob/master/LICENSE.txt</licenseUrl>
-        <projectUrl>https://github.com/Pushwoosh/pushwoosh-xamarin</projectUrl>
+        <projectUrl>https://github.com/Pushwoosh/pushwoosh-dotnet</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/Pushwoosh/pushwoosh-xamarin/master/logo.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Pushwoosh SDK for .Net</description>
@@ -45,11 +45,11 @@
           <file src="bin/Release/net6.0/PushwooshSDK.DotNet.Core.pdb" target="lib/net7.0"/>
           <file src="bin/Release/net6.0/PushwooshSDK.DotNet.pdb" target="lib/net7.0"/>
         <!--Android-->
-	      <file src="../PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-badge_v6.6.11.aar" target="lib/net7.0-android33.0/pushwoosh-badge_v6.6.11.aar" />
-   	      <file src="../PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-firebase_v6.6.11.aar" target="lib/net7.0-android33.0/pushwoosh-firebase_v6.6.11.aar" />
-    	      <file src="../PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox-ui_v6.6.11.aar" target="lib/net7.0-android33.0/pushwoosh-inbox-ui_v6.6.11.aar" />
-    	      <file src="../PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox_v6.6.11.aar" target="lib/net7.0-android33.0/pushwoosh-inbox_v6.6.11.aar" />
-   	      <file src="../PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh_v6.6.11.aar" target="lib/net7.0-android33.0/pushwoosh_v6.6.11.aar" />
+	        <file src="/Users/vromanychev/Projects/PushwooshSDK.DotNet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-badge_v6.6.12.aar" target="lib/net7.0-android33.0/pushwoosh-badge_v6.6.12.aar" />
+   	      <file src="/Users/vromanychev/Projects/PushwooshSDK.DotNet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-firebase_v6.6.12.aar" target="lib/net7.0-android33.0/pushwoosh-firebase_v6.6.12.aar" />
+    	    <file src="/Users/vromanychev/Projects/PushwooshSDK.DotNet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox-ui_v6.6.12.aar" target="lib/net7.0-android33.0/pushwoosh-inbox-ui_v6.6.12.aar" />
+    	    <file src="/Users/vromanychev/Projects/PushwooshSDK.DotNet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox_v6.6.12.aar" target="lib/net7.0-android33.0/pushwoosh-inbox_v6.6.12.aar" />
+   	      <file src="/Users/vromanychev/Projects/PushwooshSDK.DotNet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh_v6.6.12.aar" target="lib/net7.0-android33.0/pushwoosh_v6.6.12.aar" />
 
           <file src="bin/Release/net6.0-android/PushwooshSDK.DotNet.dll" target="lib/net7.0-android33.0"/>
           <file src="bin/Release/net6.0-android/PushwooshSDK.DotNet.Core.dll" target="lib/net7.0-android33.0" />
@@ -70,6 +70,6 @@
           <file src="bin/Release/net6.0-ios/PushwooshSDK.DotNet.Core.pdb" target="lib/net7.0-ios10.0"/>
           <file src="bin/Release/net6.0-ios/PushwooshSDK.DotNet.iOS.Bindings.pdb" target="lib/net7.0-ios10.0"/>
           <file src="bin/Release/net6.0-ios/PushwooshSDK.DotNet.iOS.Library.pdb" target="lib/net7.0-ios10.0"/>
-          <file src="../PushwooshSDK.DotNet.iOS.Bindings/bin/Release/net6.0-ios/PushwooshSDK.DotNet.iOS.Bindings.resources.zip" target="lib/net7.0-ios10.0/PushwooshSDK.DotNet.iOS.Bindings.resources.zip" />
+          <file src="/Users/vromanychev/Projects/PushwooshSDK.DotNet/PushwooshSDK.DotNet.iOS.Bindings/bin/Release/net6.0-ios/PushwooshSDK.DotNet.iOS.Bindings.resources.zip" target="lib/net7.0-ios10.0/PushwooshSDK.DotNet.iOS.Bindings.resources.zip" />
       </files>
 </package>

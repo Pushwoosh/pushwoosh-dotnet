@@ -79,10 +79,26 @@ namespace Pushwoosh.iOS
             if (UNUserNotificationCenter.Current != null)
                 UNUserNotificationCenter.Current.Delegate = nativeManager.NotificationCenterDelegate;
             InAppManager = new InAppManager(PWInAppManager.SharedManager);
-            nativeManager.SendAppOpen();
+            if (nativeManager.AppCode.ToString() != null && !nativeManager.AppCode.ToString().Equals(""))
+            {
+                nativeManager.SendAppOpen();
+            }
+            
         }
 
-        public override string AppCode => nativeManager.AppCode;
+        public override string AppCode
+        {
+            get
+            {
+                return nativeManager.AppCode;
+            }
+            set
+            {
+                NSString nsvalue = new NSString(value);
+                PushNotificationManager.InitializeWithAppCode(nsvalue, nsvalue);
+                nativeManager.SendAppOpen();
+            }
+        }
 
         public override string HardwareId => nativeManager.HWID;
 
@@ -280,8 +296,7 @@ namespace Pushwoosh.iOS
         public PushNotification LaunchNotification => PushNotificationFromUserInfo(nativeManager.LaunchNotification);
 
         public static void Init()
-        {
-            global::PushwooshSDK.DotNet.Core.PushManager.Instance = new PushManager();
+        {            global::PushwooshSDK.DotNet.Core.PushManager.Instance = new PushManager();
         }
     }
 }
