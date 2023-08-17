@@ -280,7 +280,7 @@ namespace Com.Pushwoosh.iOS
     }
 
     // @protocol PWInboxMessageProtocol <NSObject>
-    [Protocol, Model]
+    [Protocol]
     [BaseType(typeof(NSObject))]
     interface PWInboxMessageProtocol : INativeObject
     {
@@ -335,19 +335,14 @@ namespace Com.Pushwoosh.iOS
         NSDictionary ActionParams { get; }
     }
 
+    interface IPWInboxMessageProtocol { }
+
+
     // @interface PWInbox : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
     interface PWInbox : INativeObject
     {
-        // extern NSString *const PWInboxMessagesDidUpdateNotification;
-        [Field("PWInboxMessagesDidUpdateNotification", "__Internal")]
-        NSString PWInboxMessagesDidUpdateNotification { get; }
-
-        // extern NSString *const PWInboxMessagesDidReceiveInPushNotification;
-        [Field("PWInboxMessagesDidReceiveInPushNotification", "__Internal")]
-        NSString PWInboxMessagesDidReceiveInPushNotification { get; }
-
         // +(void)messagesWithNoActionPerformedCountWithCompletion:(void (^)(NSInteger, NSError *))completion;
         [Static]
         [Export("messagesWithNoActionPerformedCountWithCompletion:")]
@@ -366,7 +361,7 @@ namespace Com.Pushwoosh.iOS
         // +(void)loadMessagesWithCompletion:(void (^)(NSArray<NSObject<PWInboxMessageProtocol> *> *, NSError *))completion;
         [Static]
         [Export("loadMessagesWithCompletion:")]
-        void LoadMessagesWithCompletion(Action<NSArray<PWInboxMessageProtocol>, NSError> completion);
+        void LoadMessagesWithCompletion(Action<IPWInboxMessageProtocol[], NSError> completion);
 
         // +(void)performActionForMessageWithCode:(NSString *)code;
         [Static]
@@ -382,25 +377,5 @@ namespace Com.Pushwoosh.iOS
         [Static]
         [Export("readMessagesWithCodes:")]
         void ReadMessagesWithCodes(string[] codes);
-
-        // +(id<NSObject>)addObserverForDidReceiveInPushNotificationCompletion:(void (^)(NSArray<NSObject<PWInboxMessageProtocol> *> *))completion;
-        [Static]
-        [Export("addObserverForDidReceiveInPushNotificationCompletion:")]
-        NSObject AddObserverForDidReceiveInPushNotificationCompletion(Action<NSArray<PWInboxMessageProtocol>> completion);
-
-        // +(id<NSObject>)addObserverForUpdateInboxMessagesCompletion:(void (^)(NSArray<NSObject<PWInboxMessageProtocol> *> *, NSArray<NSObject<PWInboxMessageProtocol> *> *, NSArray<NSObject<PWInboxMessageProtocol> *> *))completion;
-        [Static]
-        [Export("addObserverForUpdateInboxMessagesCompletion:")]
-        NSObject AddObserverForUpdateInboxMessagesCompletion(Action<NSArray<PWInboxMessageProtocol>, NSArray<PWInboxMessageProtocol>, NSArray<PWInboxMessageProtocol>> completion);
-
-        //+ (id<NSObject>) addObserverForUnreadMessagesCountUsingBlock:(void (^)(NSUInteger count))block;
-        [Static]
-        [Export("addObserverForUnreadMessagesCountUsingBlock:")]
-        NSObject AddObserverForUnreadMessagesCount(Action<nint> completion);
-
-        // +(void)removeObserver:(id<NSObject>)observer;
-        [Static]
-        [Export("removeObserver:")]
-        void RemoveObserver(NSObject observer);
     }
 }
