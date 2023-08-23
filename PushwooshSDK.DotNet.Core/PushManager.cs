@@ -96,6 +96,7 @@ namespace PushwooshSDK.DotNet.Core
         public abstract void CancelAllLocalNotifications();
 
         public IInAppManager? InAppManager { get; protected set; }
+        public IInboxManager? InboxManager { get; protected set; }
 
         static PushManager? manager = null;
         public static PushManager? Instance 
