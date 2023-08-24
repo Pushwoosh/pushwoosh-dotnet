@@ -51,6 +51,7 @@ namespace Pushwoosh.Android
         {
             nativeManager = PushNotificationsManager.Instance;
             InAppManager = new InAppManager(PushwooshInApp.Instance);
+            InboxManager = new InboxManager();
         }
 
         public bool MultiNotificationsMode

@@ -33,6 +33,9 @@
 	  
 	<attr path="/api/package[@name='com.pushwoosh']/class[@name='Pushwoosh']" name="managedName">PushNotificationsManager</attr>
 
+	<attr path="/api/package[@name='com.pushwoosh.inbox']" name="managedName">Pushwoosh.Inbox</attr>
+	<attr path="/api/package[@name='com.pushwoosh.inbox.data']" name="managedName">Pushwoosh.Inbox.Data</attr>	
+
 	<attr path="/api/package[@name='com.pushwoosh.inbox.ui.presentation.view.adapter']/class[@name='BaseRecyclerAdapter.BaseRecyclerAdapterInvoker']/method[@name='onCreateViewHolder']" name="managedReturn">Java.Lang.Object</attr>    
     <attr path="/api/package[@name='com.pushwoosh.inbox.ui.presentation.view.adapter.inbox']/class[@name='InboxAdapter']/method[@name='createViewHolderInstance']" name="managedReturn">Java.Lang.Object</attr>
     <attr path="/api/package[@name='com.pushwoosh.inbox.ui.presentation.view.adapter.inbox']/class[@name='InboxViewHolder']/method[@name='fillView']/parameter[1]" name="managedType">Java.Lang.Object</attr>

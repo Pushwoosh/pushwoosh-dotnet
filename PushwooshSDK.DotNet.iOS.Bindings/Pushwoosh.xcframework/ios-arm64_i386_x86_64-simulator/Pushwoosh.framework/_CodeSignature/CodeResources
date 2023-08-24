@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/PWInAppManager.h</key>
 		<data>
-		eT+oAMvcjgX5Mc7D09ES/OWb8d4=
+		G/ykt8oTaVVi5DJ/YP9jCXkIiXM=
 		</data>
 		<key>Headers/PWInbox.h</key>
 		<data>
@@ -50,11 +50,11 @@
 		</data>
 		<key>Headers/Pushwoosh.h</key>
 		<data>
-		tHSS2FyaBhpRpGhuRqmrGhPiBrc=
+		tv2zcgTUPzyvDxtEhGXBXPR49wM=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		x2O94CY7PM+6N+81ngf5RBE5x68=
+		qFoCAHccKZ3xo9yu/XaapwwE9xg=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -89,11 +89,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			eT+oAMvcjgX5Mc7D09ES/OWb8d4=
+			G/ykt8oTaVVi5DJ/YP9jCXkIiXM=
 			</data>
 			<key>hash2</key>
 			<data>
-			gxOcdMfJRCTQJiylpU6Kv3wAiCaGws+jlD8TcLv0VBw=
+			dxyXheFyIE3yWUatZY5jFsnblAbTjtvLf9Ldbeq5gMc=
 			</data>
 		</dict>
 		<key>Headers/PWInbox.h</key>
@@ -188,11 +188,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tHSS2FyaBhpRpGhuRqmrGhPiBrc=
+			tv2zcgTUPzyvDxtEhGXBXPR49wM=
 			</data>
 			<key>hash2</key>
 			<data>
-			+q4u2AJksULbGKTG9qjZS8ixEq7GmvskMEKiSAmUEIQ=
+			sTIIJw0yffKdaEZ6OdMkixtEx/wiaX699AoLmFlIg4k=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
