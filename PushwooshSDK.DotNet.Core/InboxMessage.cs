@@ -3,7 +3,7 @@ namespace PushwooshSDK.DotNet.Core
 {
     public class InboxMessage
     {
-        public InboxMessage(string? message, string? title, InboxMessageType type, string? actionParams, string? attachmentUrl, string? imageUrl, string? code, string? sendDate, bool isActionPerformed, bool isRead)
+        public InboxMessage(string? message, string? title, InboxMessageType type, string? actionParams, string? attachmentUrl, string? imageUrl, string? code, DateTime? sendDate, bool isActionPerformed, bool isRead)
         {
             Message = message;
             Title = title;
@@ -24,7 +24,7 @@ namespace PushwooshSDK.DotNet.Core
         public string? AttachmentUrl { get; set; }
         public string? ImageUrl { get; set; }
         public string? Code { get; set; }
-        public string? SendDate { get; set; }
+        public DateTime? SendDate { get; set; }
         public bool IsActionPerformed { get; set; }
         public bool IsRead { get; set; }
 	}

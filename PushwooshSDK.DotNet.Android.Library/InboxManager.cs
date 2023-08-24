@@ -31,7 +31,7 @@ namespace Pushwoosh.Android
                         {
                             foreach (var msg in messages)
                             {
-                                InboxMessage inboxMessage = new InboxMessage(msg.Message, msg.Title, (InboxMessageType)msg.Type.Code, msg.ActionParams, msg.BannerUrl, msg.ImageUrl, msg.Code, msg.ISO8601SendDate, msg.IsActionPerformed, msg.IsRead);
+                                InboxMessage inboxMessage = new InboxMessage(msg.Message, msg.Title, (InboxMessageType)msg.Type.Code, msg.ActionParams, msg.BannerUrl, msg.ImageUrl, msg.Code, DateTime.Parse(msg.ISO8601SendDate), msg.IsActionPerformed, msg.IsRead);
                                 messagesList.Add(inboxMessage);
                             }
                         }

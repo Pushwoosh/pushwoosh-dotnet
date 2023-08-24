@@ -79,6 +79,7 @@ namespace Pushwoosh.iOS
             if (UNUserNotificationCenter.Current != null)
                 UNUserNotificationCenter.Current.Delegate = nativeManager.NotificationCenterDelegate;
             InAppManager = new InAppManager(PWInAppManager.SharedManager);
+            InboxManager = new InboxManager();
             if (nativeManager.AppCode.ToString() != null && !nativeManager.AppCode.ToString().Equals(""))
             {
                 nativeManager.SendAppOpen();
