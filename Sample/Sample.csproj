@@ -33,6 +33,8 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
+	  <CodesignProvision>Universal Development</CodesignProvision>
+	  <CodesignKey>Apple Development: Max Konev (M6E83N8DU5)</CodesignKey>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->

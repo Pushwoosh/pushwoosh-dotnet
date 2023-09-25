@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Pushwoosh.DotNet</id>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
         <title>Pushwoosh .Net SDK</title>
         <authors>Pushwoosh</authors>
         <owners>Pushwoosh</owners>
@@ -45,11 +45,11 @@
           <file src="bin/Release/net6.0/PushwooshSDK.DotNet.Core.pdb" target="lib/net7.0"/>
           <file src="bin/Release/net6.0/PushwooshSDK.DotNet.pdb" target="lib/net7.0"/>
         <!--Android-->
-	        <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-badge_v6.6.15.aar" target="lib/net7.0-android33.0/pushwoosh-badge_v6.6.15.aar" />
-   	      <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-firebase_v6.6.15.aar" target="lib/net7.0-android33.0/pushwoosh-firebase_v6.6.15.aar" />
-    	    <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox-ui_v6.6.15.aar" target="lib/net7.0-android33.0/pushwoosh-inbox-ui_v6.6.15.aar" />
-    	    <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox_v6.6.15.aar" target="lib/net7.0-android33.0/pushwoosh-inbox_v6.6.15.aar" />
-   	      <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh_v6.6.15.aar" target="lib/net7.0-android33.0/pushwoosh_v6.6.15.aar" />
+	        <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-badge_v6.6.16.aar" target="lib/net7.0-android33.0/pushwoosh-badge_v6.6.16.aar" />
+   	      <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-firebase_v6.6.16.aar" target="lib/net7.0-android33.0/pushwoosh-firebase_v6.6.16.aar" />
+    	    <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox-ui_v6.6.16.aar" target="lib/net7.0-android33.0/pushwoosh-inbox-ui_v6.6.16.aar" />
+    	    <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox_v6.6.16.aar" target="lib/net7.0-android33.0/pushwoosh-inbox_v6.6.16.aar" />
+   	      <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh_v6.6.16.aar" target="lib/net7.0-android33.0/pushwoosh_v6.6.16.aar" />
 
           <file src="bin/Release/net6.0-android/PushwooshSDK.DotNet.dll" target="lib/net7.0-android33.0"/>
           <file src="bin/Release/net6.0-android/PushwooshSDK.DotNet.Core.dll" target="lib/net7.0-android33.0" />
