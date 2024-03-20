@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>PushwooshSDK.DotNet.iOS.Sample</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.pushwoosh.demoapp</string>
+	<string>com.pushwoosh.newdemo</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -39,6 +39,12 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>Pushwoosh_APPID</key>
-	<string>11C10-EF18D</string>
+	<string>A8B44-0B460</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>New Entry</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>New Entry</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>New Entry</string>
 </dict>
 </plist>

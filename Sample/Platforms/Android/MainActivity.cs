@@ -3,7 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using Pushwoosh.Android;
 
-[assembly: MetaData("com.pushwoosh.appid", Value = "11C10-EF18D")]
+[assembly: MetaData("com.pushwoosh.appid", Value = "A8B44-0B460")]
 [assembly: MetaData("com.pushwoosh.senderid", Value = "@string/fcm_sender_id")]
 
 namespace Sample;

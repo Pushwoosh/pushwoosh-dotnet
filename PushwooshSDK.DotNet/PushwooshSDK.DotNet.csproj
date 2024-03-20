@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net6.0-android;net6.0-ios</TargetFrameworks>
+		<TargetFrameworks>net7.0;net7.0-android;net7.0-ios</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<OutputType>Library</OutputType>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">10.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
 
 		<AssemblyName>PushwooshSDK.DotNet</AssemblyName>
 		<PackageId>PushwooshSDK.DotNet</PackageId>
@@ -21,7 +21,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\PushwooshSDK.DotNet.Android.Library\PushwooshSDK.DotNet.Android.Library.csproj" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	  <ProjectReference Include="..\PushwooshSDK.DotNet.Core\PushwooshSDK.DotNet.Core.csproj" />
 	  <ProjectReference Include="..\PushwooshSDK.DotNet.iOS.Library\PushwooshSDK.DotNet.iOS.Library.csproj" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'" />
+	  <ProjectReference Include="..\PushwooshSDK.DotNet.Core\PushwooshSDK.DotNet.Core.csproj" />
 	</ItemGroup>
 </Project>

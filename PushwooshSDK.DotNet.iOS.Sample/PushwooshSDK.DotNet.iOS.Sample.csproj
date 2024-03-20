@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-ios</TargetFramework>
+    <TargetFramework>net7.0-ios</TargetFramework>
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
@@ -8,13 +8,16 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CreatePackage>false</CreatePackage>
-    <CodesignProvision>Universal Development</CodesignProvision>
-    <CodesignKey>Apple Development: Max Konev (M6E83N8DU5)</CodesignKey>
+    <CodesignProvision>Automatic</CodesignProvision>
+    <CodesignKey>Apple Development: Vitaly Romanychev (5UYT3NK68B)</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <CreatePackage>false</CreatePackage>
+    <CodesignProvision></CodesignProvision>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\PushwooshSDK.DotNet.iOS.Bindings\PushwooshSDK.DotNet.iOS.Bindings.csproj" />
+    <ProjectReference Include="..\PushwooshSDK.DotNet.Geozones.iOS.Bindings\PushwooshSDK.DotNet.Geozones.iOS.Bindings.csproj" />
   </ItemGroup>
 </Project>
