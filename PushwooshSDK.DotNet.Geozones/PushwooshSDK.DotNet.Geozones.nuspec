@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Pushwoosh.DotNet.Geozones</id>
+        <version>1.0.0</version>
+        <title>Pushwoosh .Net Geozones SDK</title>
+        <authors>Pushwoosh</authors>
+        <owners>Pushwoosh</owners>
+        <licenseUrl>https://github.com/Pushwoosh/push-notifications-sdk/blob/master/LICENSE.txt</licenseUrl>
+        <projectUrl>https://github.com/Pushwoosh/pushwoosh-dotnet</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/Pushwoosh/pushwoosh-xamarin/master/logo.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Pushwoosh Geozones SDK for .Net</description>
+        <tags>MAUI, .Net, DotNet , pushwoosh, push, geozones, location</tags>
+        <dependencies>
+            <group targetFramework="net7.0">
+            </group>
+            <group targetFramework="net7.0-android33.0">
+              <dependency id="Xamarin.GooglePlayServices.Location" version="121.0.1.4" />
+            </group>
+            <group targetFramework="net7.0-ios10.0">
+            </group>
+        </dependencies>
+      </metadata>
+
+      <files>
+        <!--Core-->
+          <file src="bin/Debug/net7.0/PushwooshSDK.DotNet.Geozones.dll" target="lib/net7.0"/>
+          <file src="bin/Debug/net7.0/PushwooshSDK.DotNet.Geozones.pdb" target="lib/net7.0"/>
+        <!--Android-->
+	      <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Geozones.Android.Bindings/Jars/pushwoosh-location_v6.7.5.aar" target="lib/net7.0-android33.0/pushwoosh-location_v6.7.5.aar" />
+
+          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Geozones.dll" target="lib/net7.0-android33.0" />
+          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Geozones.Android.Bindings.dll" target="lib/net7.0-android33.0" />
+
+          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Geozones.pdb" target="lib/net7.0-android33.0"/>
+          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Geozones.Android.Bindings.pdb" target="lib/net7.0-android33.0" />
+        <!--iOS-->
+          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Geozones.dll" target="lib/net7.0-ios10.0"/>
+          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Geozones.iOS.Bindings.dll" target="lib/net7.0-ios10.0"/>
+
+          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Geozones.pdb" target="lib/net7.0-ios10.0"/>
+          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Geozones.iOS.Bindings.pdb" target="lib/net7.0-ios10.0"/>
+          <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Geozones/bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Geozones.iOS.Bindings.resources.zip" target="lib/net7.0-ios10.0/PushwooshSDK.DotNet.Geozones.iOS.Bindings.resources.zip" />
+      </files>
+</package>

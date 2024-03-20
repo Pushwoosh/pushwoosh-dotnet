@@ -21,6 +21,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushwooshSDK.DotNet", "PushwooshSDK.DotNet\PushwooshSDK.DotNet.csproj", "{727AA998-3356-458A-BA83-AF45460FB120}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushwooshSDK.DotNet.Geozones.iOS.Bindings", "PushwooshSDK.DotNet.Geozones.iOS.Bindings\PushwooshSDK.DotNet.Geozones.iOS.Bindings.csproj", "{34C8A689-6E48-41FF-BE73-55C89942FF17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushwooshSDK.DotNet.Geozones.Android.Bindings", "PushwooshSDK.DotNet.Geozones.Android.Bindings\PushwooshSDK.DotNet.Geozones.Android.Bindings.csproj", "{FBE882A0-49B5-4E3B-9DD2-F155893373DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushwooshSDK.DotNet.Geozones", "PushwooshSDK.DotNet.Geozones\PushwooshSDK.DotNet.Geozones.csproj", "{1D33A3CD-8182-4C4A-8355-BCAB7042D39E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeozonesSample", "GeozonesSample\GeozonesSample.csproj", "{E9CE537A-E2F9-4813-B1CA-2E039B0E4A6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PushwooshSDK.Dotnet.Geozones", "PushwooshSDK.Dotnet.Geozones", "{BEB17761-59A2-47D2-9458-3726484FABB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,11 +73,33 @@ Global
 		{727AA998-3356-458A-BA83-AF45460FB120}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{727AA998-3356-458A-BA83-AF45460FB120}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{727AA998-3356-458A-BA83-AF45460FB120}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34C8A689-6E48-41FF-BE73-55C89942FF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C8A689-6E48-41FF-BE73-55C89942FF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C8A689-6E48-41FF-BE73-55C89942FF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C8A689-6E48-41FF-BE73-55C89942FF17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE882A0-49B5-4E3B-9DD2-F155893373DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE882A0-49B5-4E3B-9DD2-F155893373DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE882A0-49B5-4E3B-9DD2-F155893373DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE882A0-49B5-4E3B-9DD2-F155893373DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D33A3CD-8182-4C4A-8355-BCAB7042D39E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D33A3CD-8182-4C4A-8355-BCAB7042D39E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D33A3CD-8182-4C4A-8355-BCAB7042D39E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D33A3CD-8182-4C4A-8355-BCAB7042D39E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9CE537A-E2F9-4813-B1CA-2E039B0E4A6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9CE537A-E2F9-4813-B1CA-2E039B0E4A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9CE537A-E2F9-4813-B1CA-2E039B0E4A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9CE537A-E2F9-4813-B1CA-2E039B0E4A6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4821AD43-8BF1-48C2-835C-BC7EC818398D}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1D33A3CD-8182-4C4A-8355-BCAB7042D39E} = {BEB17761-59A2-47D2-9458-3726484FABB6}
+		{FBE882A0-49B5-4E3B-9DD2-F155893373DC} = {BEB17761-59A2-47D2-9458-3726484FABB6}
+		{34C8A689-6E48-41FF-BE73-55C89942FF17} = {BEB17761-59A2-47D2-9458-3726484FABB6}
+		{E9CE537A-E2F9-4813-B1CA-2E039B0E4A6A} = {BEB17761-59A2-47D2-9458-3726484FABB6}
 	EndGlobalSection
 EndGlobal

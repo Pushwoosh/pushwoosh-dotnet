@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-android;net6.0-ios</TargetFrameworks>
+		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Sample</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -12,7 +12,7 @@
 		<ApplicationTitle>Sample</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.pushwoosh.demoapp</ApplicationId>
+		<ApplicationId>com.pushwoosh.newdemo</ApplicationId>
 		<ApplicationIdGuid>21c01e3f-9d03-4863-b534-045c7bbe8c81</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -20,21 +20,18 @@
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
+
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	  <CodesignProvision>Universal Development</CodesignProvision>
-	  <CodesignKey>Apple Development: Max Konev (M6E83N8DU5)</CodesignKey>
+	  <CodesignKey>iPhone Developer</CodesignKey>
+	  <CodesignProvision>com.pushwoosh.newdemo</CodesignProvision>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
-	  <CreatePackage>false</CreatePackage>
-	  <CodesignProvision>Universal Development</CodesignProvision>
-	  <CodesignKey>Apple Development: Max Konev (M6E83N8DU5)</CodesignKey>
+	  <CodesignKey>Apple Development: Vitaly Romanychev (5UYT3NK68B)</CodesignKey>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
@@ -57,14 +54,17 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.7.0.1"/>
+	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\PushwooshSDK.DotNet\PushwooshSDK.DotNet.csproj" />
+	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Platforms\Android\google-services.json" />
 	</ItemGroup>
 	<ItemGroup>
 	  <GoogleServicesJson Include="Platforms\Android\google-services.json" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\PushwooshSDK.DotNet\PushwooshSDK.DotNet.csproj" />
 	</ItemGroup>
 </Project>

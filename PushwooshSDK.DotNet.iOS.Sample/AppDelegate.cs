@@ -21,9 +21,10 @@ public class AppDelegate : UIApplicationDelegate {
 		UNUserNotificationCenter.Current.Delegate = pushmanager.NotificationCenterDelegate;
 
 		PWInAppManager inAppManager = PWInAppManager.SharedManager;
-
+		PWGeozonesManager geozonesManager = PWGeozonesManager.SharedManager;
 		pushmanager.RegisterForPushNotifications();
 		inAppManager.SetUserId((NSString)"test");
+		geozonesManager.StartLocationTracking();
 
 		// create a UIViewController with a single UILabel
 		var vc = new UIViewController ();

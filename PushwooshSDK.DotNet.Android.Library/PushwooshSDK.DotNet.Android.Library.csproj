@@ -1,30 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-android</TargetFramework>
-    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <TargetFramework>net7.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PushwooshSDK.DotNet.Android.Bindings\PushwooshSDK.DotNet.Android.Bindings.csproj" />
     <ProjectReference Include="..\PushwooshSDK.DotNet.Core\PushwooshSDK.DotNet.Core.csproj" />
+    <ProjectReference Include="..\PushwooshSDK.DotNet.Android.Bindings\PushwooshSDK.DotNet.Android.Bindings.csproj" />
   </ItemGroup>
     <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.9.0.1" />
-    <PackageReference Include="Xamarin.AndroidX.Arch.Core.Common" Version="2.1.0.16" />
-    <PackageReference Include="Xamarin.AndroidX.Arch.Core.Runtime" Version="2.1.0.16" />
-    <PackageReference Include="Xamarin.AndroidX.Activity" Version="1.6.1" />
-    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.5.5" />
-    <PackageReference Include="Xamarin.AndroidX.Work.Runtime" Version="2.7.1.5" />
-    <PackageReference Include="Xamarin.Firebase.Messaging" Version="123.0.8" />
-    <PackageReference Include="Xamarin.Firebase.Iid" Version="121.1.0.7" />
-    <PackageReference Include="Xamarin.Firebase.Common" Version="120.1.2" />
-    <PackageReference Include="Xamarin.Firebase.Installations" Version="117.0.3" />
-    <PackageReference Include="Xamarin.Firebase.Annotations" Version="116.1.0" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="118.1.0" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="118.1.0" />
-    <PackageReference Include="Xamarin.GooglePlayServices.CloudMessaging" Version="117.0.2.2" />
-    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.10" />
-    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.1.4.2" />
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.12.0.4" />
+    <PackageReference Include="Xamarin.AndroidX.Arch.Core.Common" Version="2.2.0.7" />
+    <PackageReference Include="Xamarin.AndroidX.Arch.Core.Runtime" Version="2.2.0.7" />
+    <PackageReference Include="Xamarin.AndroidX.Activity" Version="1.8.2.1" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.6.2.2" />
+    <PackageReference Include="Xamarin.AndroidX.Work.Runtime" Version="2.9.0.1" />
+    <PackageReference Include="Xamarin.Firebase.Messaging" Version="123.3.1.1" />
+    <PackageReference Include="Xamarin.Firebase.Iid" Version="121.1.0.13" />
+    <PackageReference Include="Xamarin.Firebase.Common" Version="120.4.2.1" />
+    <PackageReference Include="Xamarin.Firebase.Installations" Version="117.2.0.1" />
+    <PackageReference Include="Xamarin.Firebase.Annotations" Version="116.2.0.5" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="118.2.0.5" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="118.2.0.5" />
+    <PackageReference Include="Xamarin.GooglePlayServices.CloudMessaging" Version="117.1.0" />
+    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.18" />
+    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.1.4.10" />
   </ItemGroup>
 </Project>
