@@ -21,17 +21,16 @@
       <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+  <ItemGroup>
     <NativeReference Include="Pushwoosh.xcframework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
       <ForceLoad>True</ForceLoad>
     </NativeReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Properties\PublishProfiles\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 </Project>

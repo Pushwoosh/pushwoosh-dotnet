@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
+		<TargetFrameworks>net7.0-android;net7.0-ios16.1</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Sample</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -28,10 +28,14 @@
 	  <CreatePackage>false</CreatePackage>
 	  <CodesignKey>iPhone Developer</CodesignKey>
 	  <CodesignProvision>com.pushwoosh.newdemo</CodesignProvision>
+	  <RuntimeIdentifier Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' != 'arm64'">ios-x64</RuntimeIdentifier>
+	  <RuntimeIdentifier Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'arm64'">ios-arm64</RuntimeIdentifier> 
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
 	  <CodesignKey>Apple Development: Vitaly Romanychev (5UYT3NK68B)</CodesignKey>
+	  <RuntimeIdentifier Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' != 'arm64'">ios-x64</RuntimeIdentifier>
+      <RuntimeIdentifier Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'arm64'">ios-arm64</RuntimeIdentifier> 
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
@@ -55,7 +59,9 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
-		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.7.0.1"/>
+		<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.7.0.1" />	
+		<PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.6.2" />
+		<PackageReference Include="Xamarin.GooglePlayServices.Location" Version="121.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>

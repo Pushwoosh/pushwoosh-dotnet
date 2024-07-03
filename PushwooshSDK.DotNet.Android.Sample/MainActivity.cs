@@ -1,5 +1,4 @@
 ﻿using Pushwoosh.Android;
-using Pushwoosh.Android.Location;
 
 namespace PushwooshSDK.DotNet.Android.Sample;
 
@@ -10,8 +9,6 @@ public class MainActivity : Activity
     {
         base.OnCreate(savedInstanceState);
         PushManager.Init();
-        LocationManager locationManager = new LocationManager();
-        locationManager.StartLocationTracking();
         PushManager manager = PushManager.Instance;
             manager.Register();
             manager.InAppManager.SetUserId("test");

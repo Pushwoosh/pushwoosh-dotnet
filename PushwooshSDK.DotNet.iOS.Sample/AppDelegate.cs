@@ -6,7 +6,7 @@ using UserNotifications;
 
 [Register ("AppDelegate")]
 public class AppDelegate : UIApplicationDelegate {
-	public override UIWindow? Window {
+	public override UIWindow? Window {	
 		get;
 		set;
 	}

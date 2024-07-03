@@ -12,7 +12,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Jars\" />
-    <None Remove="Jars\pushwoosh-firebase_v6.7.5.jar" />
+    <None Remove="Jars\pushwoosh-firebase_v6.7.10.jar" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Jars\" />

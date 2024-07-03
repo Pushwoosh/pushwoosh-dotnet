@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-ios</TargetFramework>
+    <TargetFramework>net8.0-ios</TargetFramework>
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
@@ -10,11 +10,15 @@
     <CreatePackage>false</CreatePackage>
     <CodesignProvision>Automatic</CodesignProvision>
     <CodesignKey>Apple Development: Vitaly Romanychev (5UYT3NK68B)</CodesignKey>
+    <RuntimeIdentifier Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' != 'arm64'">ios-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'arm64'">ios-arm64</RuntimeIdentifier> 
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <CreatePackage>false</CreatePackage>
     <CodesignProvision></CodesignProvision>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <RuntimeIdentifier Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' != 'arm64'">ios-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'arm64'">ios-arm64</RuntimeIdentifier> 
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\PushwooshSDK.DotNet.iOS.Bindings\PushwooshSDK.DotNet.iOS.Bindings.csproj" />
