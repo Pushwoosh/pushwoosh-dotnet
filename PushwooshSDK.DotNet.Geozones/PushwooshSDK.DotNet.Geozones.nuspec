@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Pushwoosh.DotNet.Geozones</id>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
         <title>Pushwoosh .Net Geozones SDK</title>
         <authors>Pushwoosh</authors>
         <owners>Pushwoosh</owners>
@@ -28,7 +28,7 @@
           <file src="bin/Debug/net7.0/PushwooshSDK.DotNet.Geozones.dll" target="lib/net7.0"/>
           <file src="bin/Debug/net7.0/PushwooshSDK.DotNet.Geozones.pdb" target="lib/net7.0"/>
         <!--Android-->
-	      <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Geozones.Android.Bindings/Jars/pushwoosh-location_v6.7.10.aar" target="lib/net7.0-android33.0/pushwoosh-location_v6.7.10.aar" />
+	      <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Geozones.Android.Bindings/Jars/pushwoosh-location_v6.7.14.aar" target="lib/net7.0-android33.0/pushwoosh-location_v6.7.14.aar" />
 
           <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Geozones.dll" target="lib/net7.0-android33.0" />
           <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Geozones.Android.Bindings.dll" target="lib/net7.0-android33.0" />
