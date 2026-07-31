@@ -2,45 +2,63 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Pushwoosh.DotNet.Geozones</id>
-        <version>1.0.2</version>
+        <version>2.0.0</version>
         <title>Pushwoosh .Net Geozones SDK</title>
         <authors>Pushwoosh</authors>
         <owners>Pushwoosh</owners>
-        <licenseUrl>https://github.com/Pushwoosh/push-notifications-sdk/blob/master/LICENSE.txt</licenseUrl>
+        <license type="expression">MIT</license>
         <projectUrl>https://github.com/Pushwoosh/pushwoosh-dotnet</projectUrl>
-        <iconUrl>https://raw.githubusercontent.com/Pushwoosh/pushwoosh-xamarin/master/logo.png</iconUrl>
+        <icon>pushwoosh.png</icon>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <readme>README.md</readme>
         <description>Pushwoosh Geozones SDK for .Net</description>
         <tags>MAUI, .Net, DotNet , pushwoosh, push, geozones, location</tags>
         <dependencies>
-            <group targetFramework="net7.0">
+            <!-- Geozones is an add-on and cannot work alone: pushwoosh-location.aar
+                 references com.pushwoosh.internal.* classes that only exist in the
+                 core aar, and every PushwooshGeozones slice has an LC_LOAD_DYLIB on
+                 PushwooshFramework. Without this dependency NuGet happily installs
+                 Geozones by itself and the app dies at native load time.
+                 The range is same-major, not an exact pin: an exact pin does not
+                 actually stop a mismatched pair (NuGet only warns, NU1608) and it
+                 would hard-fail with NU1107 the day a second add-on package pins a
+                 different core version. tools/release.bash rewrites both bounds. -->
+            <group targetFramework="net8.0">
+              <dependency id="Pushwoosh.DotNet" version="[2.0.0, 3.0.0)" />
             </group>
-            <group targetFramework="net7.0-android33.0">
+            <group targetFramework="net8.0-android34.0">
+              <dependency id="Pushwoosh.DotNet" version="[2.0.0, 3.0.0)" />
               <dependency id="Xamarin.GooglePlayServices.Location" version="121.0.1.4" />
             </group>
-            <group targetFramework="net7.0-ios10.0">
+            <group targetFramework="net8.0-ios11.0">
+              <dependency id="Pushwoosh.DotNet" version="[2.0.0, 3.0.0)" />
             </group>
         </dependencies>
       </metadata>
 
       <files>
+        <!-- Shown on the package page, and what makes nuget.org render anything at all. -->
+          <file src="../public/README.md" target="README.md" />
+          <file src="../public/pushwoosh.png" target="pushwoosh.png" />
+          <file src="../LICENSE" target="LICENSE" />
+
         <!--Core-->
-          <file src="bin/Debug/net7.0/PushwooshSDK.DotNet.Geozones.dll" target="lib/net7.0"/>
-          <file src="bin/Debug/net7.0/PushwooshSDK.DotNet.Geozones.pdb" target="lib/net7.0"/>
+          <file src="bin/Release/net8.0/PushwooshSDK.DotNet.Geozones.dll" target="lib/net8.0"/>
+          <file src="bin/Release/net8.0/PushwooshSDK.DotNet.Geozones.xml" target="lib/net8.0" />
         <!--Android-->
-	      <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Geozones.Android.Bindings/Jars/pushwoosh-location_v6.7.14.aar" target="lib/net7.0-android33.0/pushwoosh-location_v6.7.14.aar" />
+	      <file src="../PushwooshSDK.DotNet.Geozones.Android.Bindings/Jars/pushwoosh-location_v6.10.0.aar" target="lib/net8.0-android34.0/pushwoosh-location_v6.10.0.aar" />
 
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Geozones.dll" target="lib/net7.0-android33.0" />
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Geozones.Android.Bindings.dll" target="lib/net7.0-android33.0" />
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.Geozones.dll" target="lib/net8.0-android34.0" />
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.Geozones.xml" target="lib/net8.0-android34.0" />
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.Geozones.Android.Bindings.dll" target="lib/net8.0-android34.0" />
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.Geozones.Android.Bindings.xml" target="lib/net8.0-android34.0" />
 
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Geozones.pdb" target="lib/net7.0-android33.0"/>
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Geozones.Android.Bindings.pdb" target="lib/net7.0-android33.0" />
         <!--iOS-->
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Geozones.dll" target="lib/net7.0-ios10.0"/>
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Geozones.iOS.Bindings.dll" target="lib/net7.0-ios10.0"/>
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.Geozones.dll" target="lib/net8.0-ios11.0"/>
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.Geozones.xml" target="lib/net8.0-ios11.0" />
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.Geozones.iOS.Bindings.dll" target="lib/net8.0-ios11.0"/>
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.Geozones.iOS.Bindings.xml" target="lib/net8.0-ios11.0" />
 
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Geozones.pdb" target="lib/net7.0-ios10.0"/>
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Geozones.iOS.Bindings.pdb" target="lib/net7.0-ios10.0"/>
-          <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Geozones/bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Geozones.iOS.Bindings.resources.zip" target="lib/net7.0-ios10.0/PushwooshSDK.DotNet.Geozones.iOS.Bindings.resources.zip" />
+          <file src="../PushwooshSDK.DotNet.Geozones/bin/Release/net8.0-ios/PushwooshSDK.DotNet.Geozones.iOS.Bindings.resources.zip" target="lib/net8.0-ios11.0/PushwooshSDK.DotNet.Geozones.iOS.Bindings.resources.zip" />
       </files>
 </package>

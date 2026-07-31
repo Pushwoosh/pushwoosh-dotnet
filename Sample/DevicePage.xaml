@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sample.DevicePage"
+             Style="{StaticResource PwPage}"
+             Title="Device">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,16,20,32" Spacing="16">
+
+            <Label x:Name="StateLabel"
+                   Text="Not registered"
+                   Style="{StaticResource PwTitle}" />
+            <Label x:Name="StateHint"
+                   Text="Register to receive push notifications on this device."
+                   Style="{StaticResource PwBody}" />
+
+            <!--
+                The hardware id is the hero: it is what you paste into the
+                Pushwoosh control panel to send a test push to this device.
+            -->
+            <Border Style="{StaticResource PwCard}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="HARDWARE ID" Style="{StaticResource PwEyebrow}" />
+                    <Label x:Name="HwidLabel"
+                           Text="—"
+                           Style="{StaticResource PwMonoValue}"
+                           FontSize="16"
+                           LineBreakMode="CharacterWrap" />
+                    <Button Text="Copy hardware id"
+                            Style="{StaticResource PwQuietButton}"
+                            Clicked="OnCopyHwid"
+                            HorizontalOptions="Start" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource PwCard}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="PUSH TOKEN" Style="{StaticResource PwEyebrow}" />
+                    <Label x:Name="TokenLabel"
+                           Text="Not issued yet"
+                           Style="{StaticResource PwMonoValue}"
+                           LineBreakMode="CharacterWrap" />
+                    <Button x:Name="CopyTokenButton"
+                            Text="Copy push token"
+                            Style="{StaticResource PwQuietButton}"
+                            Clicked="OnCopyToken"
+                            IsEnabled="False"
+                            HorizontalOptions="Start" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource PwCard}">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="APPLICATION" Style="{StaticResource PwEyebrow}" />
+
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" RowSpacing="8" ColumnSpacing="14">
+                        <Label Grid.Row="0" Grid.Column="0" Text="App code" Style="{StaticResource PwBody}" />
+                        <Label Grid.Row="0" Grid.Column="1" x:Name="AppCodeLabel" Text="—"
+                               Style="{StaticResource PwMonoValue}" HorizontalOptions="End" />
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="Remote notifications" Style="{StaticResource PwBody}" />
+                        <Label Grid.Row="1" Grid.Column="1" x:Name="PermissionLabel" Text="—"
+                               Style="{StaticResource PwMonoValue}" HorizontalOptions="End" />
+                    </Grid>
+
+                    <Label x:Name="SettingsDetail"
+                           Style="{StaticResource PwBody}"
+                           FontSize="12" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Register for push notifications"
+                    Style="{StaticResource PwPrimaryButton}"
+                    Clicked="OnRegister" />
+
+            <Button Text="Unregister"
+                    Style="{StaticResource PwQuietButton}"
+                    BackgroundColor="Transparent"
+                    Clicked="OnUnregister" />
+
+            <Border Style="{StaticResource PwCard}">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Settings" Style="{StaticResource PwCardTitle}" />
+
+                    <Label Text="APP CODE" Style="{StaticResource PwEyebrow}" />
+                    <Border Style="{StaticResource PwField}">
+                        <Entry x:Name="AppCodeEntry" Placeholder="XXXXX-XXXXX"
+                               Style="{StaticResource PwEntry}" />
+                    </Border>
+                    <HorizontalStackLayout Spacing="10">
+                        <Button Text="Apply app code" Style="{StaticResource PwQuietButton}"
+                                Clicked="OnApplyAppCode" />
+                        <Button Text="Forget" Style="{StaticResource PwQuietButton}"
+                                BackgroundColor="Transparent"
+                                Clicked="OnForgetAppCode" />
+                    </HorizontalStackLayout>
+
+                    <Label Text="LANGUAGE" Style="{StaticResource PwEyebrow}" />
+                    <Border Style="{StaticResource PwField}">
+                        <Entry x:Name="LanguageEntry" Placeholder="en, de, fr…"
+                               Style="{StaticResource PwEntry}" />
+                    </Border>
+                    <Button Text="Apply language" Style="{StaticResource PwQuietButton}"
+                            Clicked="OnApplyLanguage" HorizontalOptions="Start" />
+
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                            <Label Text="Foreground alerts" Style="{StaticResource PwCardTitle}" FontSize="14" />
+                            <Label Text="Show an alert for pushes that arrive while the app is open."
+                                   Style="{StaticResource PwBody}" />
+                        </VerticalStackLayout>
+                        <Switch Grid.Column="1" x:Name="AlertsSwitch"
+                                OnColor="{StaticResource PwIndigo}"
+                                Toggled="OnAlertsToggled"
+                                VerticalOptions="Center" />
+                    </Grid>
+
+                    <Grid x:Name="MultiNotificationRow" ColumnDefinitions="*,Auto" ColumnSpacing="12" IsVisible="False">
+                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                            <Label Text="Multi-notification mode" Style="{StaticResource PwCardTitle}" FontSize="14" />
+                            <Label Text="Android only. Stack notifications instead of replacing the previous one."
+                                   Style="{StaticResource PwBody}" />
+                        </VerticalStackLayout>
+                        <Switch Grid.Column="1" x:Name="MultiNotificationSwitch"
+                                OnColor="{StaticResource PwIndigo}"
+                                Toggled="OnMultiNotificationToggled"
+                                VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -47,6 +47,15 @@
     <remove-node path="/api/package[@name='com.pushwoosh.inbox.ui.model.customizing.formatter']/interface[@name='InboxDateFormatter']" />
     <remove-node path="/api/package[@name='com.pushwoosh.inbox.ui.model.customizing.formatter']/interface[@name='Formatter']" />
     
+    <!-- Since Android SDK 6.10.0 these types implement Comparable. The binding
+         generator emits IComparable without a CompareTo(Object) body, so the
+         build fails with CS0535. Dropping just the interface keeps the types.
+         InboxMessageImpl inherits Comparable from the InboxMessage interface,
+         so that is where it has to be removed. -->
+    <remove-node path="/api/package[@name='com.pushwoosh.inapp.network.model']/class[@name='Resource']/implements[@name='java.lang.Comparable']" />
+    <remove-node path="/api/package[@name='com.pushwoosh.inbox.internal.data']/class[@name='InboxMessageInternal']/implements[@name='java.lang.Comparable']" />
+    <remove-node path="/api/package[@name='com.pushwoosh.inbox.data']/interface[@name='InboxMessage']/implements[@name='java.lang.Comparable']" />
+
     <attr path="/api/package[@name='com.pushwoosh.inbox.ui']" name="managedName">Pushwoosh.Inbox.UI</attr>
     <attr path="/api/package[@name='com.pushwoosh.inbox.ui.presentation.view.activity']" name="managedName">Pushwoosh.Inbox.UI.Activity</attr>
     <attr path="/api/package[@name='com.pushwoosh.inbox.ui.model.customizing.formatter']" name="managedName">Pushwoosh.Inbox.UI.Formatter</attr>

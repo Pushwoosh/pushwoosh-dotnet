@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-android</TargetFramework>
+    <TargetFramework>net8.0-android</TargetFramework>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
@@ -12,9 +12,23 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Jars\" />
-    <None Remove="Jars\pushwoosh-firebase_v6.7.10.jar" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Jars\" />
+  </ItemGroup>
+  <!-- These are here for class-parse, not for the runtime: without them the generator cannot
+       resolve the androidx/firebase/kotlin types the aars refer to and emits ~200 BG8605
+       warnings, generating weaker signatures in their place. Versions mirror what the dependency
+       graph already resolves to (see PushwooshSDK.DotNet.Android.Library.csproj and the nuspec) so
+       the two projects cannot drift apart. -->
+  <ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.13.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.7" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.6.2.2" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.2.5" />
+    <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Work.Runtime" Version="2.9.0.1" />
+    <PackageReference Include="Xamarin.Firebase.Messaging" Version="123.3.1.1" />
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.9.23.3" />
   </ItemGroup>
 </Project>

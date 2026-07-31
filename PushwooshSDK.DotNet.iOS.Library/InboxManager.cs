@@ -18,9 +18,18 @@ namespace Pushwoosh.iOS
                 List<InboxMessage> inboxMessages = new List<InboxMessage>();
                 foreach (var msg in messages)
                 {
+                    // PWInbox.h declares the message protocol without NS_ASSUME_NONNULL,
+                    // so every object property is nullable — and the native side really
+                    // does return nil: PWInboxMessageInternal parses actionParams from
+                    // JSON and leaves it nil for an empty or malformed value, and guards
+                    // its own reads with `if (_actionParams != nil)`. Dereferencing
+                    // either of these threw NullReferenceException out of LoadMessages
+                    // for the whole batch as soon as one message lacked the field.
+                    DateTime? sendDate = msg.SendDate is null
+                        ? null
+                        : ((DateTime)msg.SendDate).ToLocalTime();
 
-                    DateTime dateTime = ((DateTime)msg.SendDate).ToLocalTime();
-                    InboxMessage message = new InboxMessage(msg.Message, msg.Title, (InboxMessageType)msg.Type, msg.ActionParams.ToString(), msg.AttachmentUrl, msg.ImageUrl, msg.Code, ((DateTime)msg.SendDate).ToLocalTime(), msg.IsActionPerformed, msg.IsRead);
+                    InboxMessage message = new InboxMessage(msg.Message, msg.Title, (InboxMessageType)msg.Type, msg.ActionParams?.ToString(), msg.AttachmentUrl, msg.ImageUrl, msg.Code, sendDate, msg.IsActionPerformed, msg.IsRead);
                     inboxMessages.Add(message);
                 }
                 completion(inboxMessages, error != null ? error.LocalizedDescription : null);

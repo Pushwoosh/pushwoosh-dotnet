@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- A geozone is only a trigger: crossing it makes Pushwoosh send a push, so
+	     this sample is useless without push registration working. Without
+	     aps-environment iOS never calls
+	     didRegisterForRemoteNotificationsWithDeviceToken, the forwarding code in
+	     AppDelegate.cs never runs, the SDK gets no token, and the device is never
+	     registered — location tracking then works and nothing ever arrives.
+	     Use development here; a distribution build needs "production" and a
+	     matching provisioning profile. -->
+	<key>aps-environment</key>
+	<string>development</string>
+</dict>
+</plist>

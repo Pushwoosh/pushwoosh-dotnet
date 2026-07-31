@@ -29,12 +29,23 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
 	<key>Pushwoosh_APPID</key>
-	<string>A8B44-0B460</string>
+	<string>XXXXX-XXXXX</string>
+	<!-- iOS shows these strings verbatim in the permission dialog, and App Review
+	     rejects placeholders. Without them StartLocationTracking() returns without
+	     starting anything and the native SDK only writes a log line. -->
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>New Entry</string>
+	<string>Used to deliver notifications relevant to where you are, including in the background.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>New Entry</string>
+	<string>Used to deliver notifications relevant to where you are.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>New Entry</string>
+	<string>Used to deliver notifications relevant to where you are.</string>
+	<!-- Geozones are only useful while the app is backgrounded: entering a zone has
+	     to be noticed when the user is not looking at the app. Without this mode the
+	     sample stops tracking as soon as it leaves the foreground. -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

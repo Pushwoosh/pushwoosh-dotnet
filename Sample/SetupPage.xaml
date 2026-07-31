@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sample.SetupPage"
+             Style="{StaticResource PwPage}"
+             Title="Setup">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24,48,24,32" Spacing="18">
+
+            <Label Text="PUSHWOOSH SAMPLE" Style="{StaticResource PwEyebrow}" />
+            <Label Text="Enter your application code"
+                   Style="{StaticResource PwTitle}" />
+            <Label Text="The sample ships without one, so it never carries a real account into the repository. Find the code at the top of your app page in the Pushwoosh control panel."
+                   Style="{StaticResource PwBody}" />
+
+            <Border Style="{StaticResource PwField}">
+                <Entry x:Name="CodeEntry"
+                       Placeholder="XXXXX-XXXXX"
+                       Style="{StaticResource PwEntry}"
+                       FontFamily="{StaticResource PwMono}"
+                       ReturnType="Go"
+                       Completed="OnContinue" />
+            </Border>
+
+            <Label x:Name="ErrorLabel"
+                   Text=""
+                   IsVisible="False"
+                   Style="{StaticResource PwBody}"
+                   TextColor="{StaticResource PwBad}" />
+
+            <Button Text="Start"
+                    Style="{StaticResource PwPrimaryButton}"
+                    Clicked="OnContinue" />
+
+            <Label Text="Android also needs google-services.json from your Firebase project."
+                   Style="{StaticResource PwBody}"
+                   FontSize="12" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

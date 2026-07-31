@@ -39,7 +39,7 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>Pushwoosh_APPID</key>
-	<string>A8B44-0B460</string>
+	<string>XXXXX-XXXXX</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>New Entry</string>
 	<key>NSLocationAlwaysUsageDescription</key>

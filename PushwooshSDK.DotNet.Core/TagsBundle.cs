@@ -40,17 +40,50 @@ namespace PushwooshSDK.DotNet.Core
                     innerData[val.Key] = val.Value;
             }
         }
-		public int GetInt(string key)
+        /// <summary>
+        /// Reads an integer tag.
+        /// </summary>
+        /// <exception cref="KeyNotFoundException">No tag with that key.</exception>
+        /// <exception cref="InvalidCastException">The tag holds a different type.</exception>
+        public int GetInt(string key)
         {
-            return (innerData[key] as Nullable<int>).Value;
+            return Get<int>(key);
         }
-		public string GetString(string key)
-		{
-            return innerData[key] as string;
-		}
+
+        /// <summary>
+        /// Reads a string tag.
+        /// </summary>
+        /// <exception cref="KeyNotFoundException">No tag with that key.</exception>
+        /// <exception cref="InvalidCastException">The tag holds a different type.</exception>
+        public string GetString(string key)
+        {
+            return Get<string>(key);
+        }
+
+        /// <summary>
+        /// Reads a list tag.
+        /// </summary>
+        /// <exception cref="KeyNotFoundException">No tag with that key.</exception>
+        /// <exception cref="InvalidCastException">The tag holds a different type.</exception>
         public IList<string> GetList(string key)
         {
-            return innerData[key] as IList<string>;
+            return Get<IList<string>>(key);
+        }
+
+        // The three getters used to disagree with each other on the same mistake: GetInt did
+        // `(value as int?).Value` and threw NullReferenceException, while GetString and GetList
+        // returned null and let the problem surface somewhere else entirely. Neither said which
+        // key or what it actually held.
+        T Get<T>(string key)
+        {
+            if (!innerData.TryGetValue(key, out var value))
+                throw new KeyNotFoundException($"There is no tag '{key}' in this bundle.");
+
+            if (value is T typed)
+                return typed;
+
+            throw new InvalidCastException(
+                $"Tag '{key}' holds {value?.GetType().Name ?? "null"}, not {typeof(T).Name}.");
         }
     }
 }

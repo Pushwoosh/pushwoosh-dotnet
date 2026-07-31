@@ -80,11 +80,13 @@ namespace Pushwoosh.iOS
                 UNUserNotificationCenter.Current.Delegate = nativeManager.NotificationCenterDelegate;
             InAppManager = new InAppManager(PWInAppManager.SharedManager);
             InboxManager = new InboxManager();
-            if (nativeManager.AppCode.ToString() != null && !nativeManager.AppCode.ToString().Equals(""))
+            // AppCode is null when Pushwoosh_APPID is absent from Info.plist,
+            // which is valid: the app can set it at runtime instead.
+            if (!string.IsNullOrEmpty(nativeManager.AppCode))
             {
                 nativeManager.SendAppOpen();
             }
-            
+
         }
 
         public override string AppCode
@@ -138,15 +140,13 @@ namespace Pushwoosh.iOS
             nativeManager.RegisterForPushNotifications();
         }
 
-        public override void SendPurchaseData(string identifier, decimal price, string currency)
-        {
-            nativeManager.SendPurchase(new NSString(identifier), new NSDecimalNumber(price.ToString(CultureInfo.InvariantCulture)), new NSString(currency), NSDate.Now);
-        }
-
         public override Task<RequestResult> SendTagsAsync(TagsBundle tags)
         {
+            // Returning null from a Task-returning method makes the caller's await throw
+            // a NullReferenceException from inside the await machinery, with nothing in the
+            // stack pointing at the real mistake.
             if (tags == null)
-                return null;
+                throw new ArgumentNullException(nameof(tags));
             var source = new TaskCompletionSource<RequestResult>();
             var dict = tags.ToDictionary;
             NSMutableDictionary tagsDict = new NSMutableDictionary();
@@ -231,62 +231,33 @@ namespace Pushwoosh.iOS
             return PWMLocalNotificationUidKey + identifier;
         }
 
+        // The UILocalNotification fallbacks these three methods used to carry were for
+        // iOS 9 and older. The package floor is iOS 11, so CheckSystemVersion(10, 0) was
+        // always true and those branches could not run; UILocalNotification itself has
+        // been deprecated since iOS 10.
         public override int ScheduleLocalNotification(string body, int delay)
         {
-            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+            UNMutableNotificationContent content = new UNMutableNotificationContent();
+            content.Body = body;
+            content.Sound = UNNotificationSound.Default;
+            UNTimeIntervalNotificationTrigger trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(delay, false);
+            UNNotificationRequest request = UNNotificationRequest.FromIdentifier(StringIdentifierFromInt(LocalNotificationUid), content, trigger);
+            UNUserNotificationCenter.Current.AddNotificationRequest(request, (NSError error) =>
             {
-                UNUserNotificationCenter center = UNUserNotificationCenter.Current;
-                UNMutableNotificationContent content = new UNMutableNotificationContent();
-                content.Body = body;
-                content.Sound = UNNotificationSound.Default;
-                UNTimeIntervalNotificationTrigger trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(delay, false);
-                UNNotificationRequest request = UNNotificationRequest.FromIdentifier(StringIdentifierFromInt(LocalNotificationUid), content, trigger);
-                center.AddNotificationRequest(request, (NSError error) =>
-                {
-                    if (error != null)
-                        Console.WriteLine("Something went wrong:" + error);
-                });
-            }
-            else
-            {
-                UILocalNotification localNotification = new UILocalNotification();
-                localNotification.FireDate = NSDate.FromTimeIntervalSinceNow(delay);
-                localNotification.AlertBody = body;
-                localNotification.TimeZone = NSTimeZone.DefaultTimeZone;
-                localNotification.UserInfo = NSDictionary.FromObjectAndKey(NSNumber.FromInt32(LocalNotificationUid), new NSString(PWMLocalNotificationUidKey));
-                UIApplication.SharedApplication.ScheduleLocalNotification(localNotification);
-            }
+                if (error != null)
+                    Console.WriteLine("Something went wrong:" + error);
+            });
             return LocalNotificationUid++;
         }
 
         public override void CancelLocalNotification(int notificationId)
         {
-            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
-            {
-                UNUserNotificationCenter.Current.RemovePendingNotificationRequests(new[] { StringIdentifierFromInt(notificationId) });
-            }
-            else
-            {
-                UILocalNotification notificationToDelete = null;
-                NSString uidKey = new NSString(PWMLocalNotificationUidKey);
-                foreach (UILocalNotification notification in UIApplication.SharedApplication.ScheduledLocalNotifications)
-                {
-                    if (notification.UserInfo.ObjectForKey(uidKey).IsEqual(NSNumber.FromInt32(notificationId)))
-                    {
-                        notificationToDelete = notification;
-                        break;
-                    }
-                }
-                if (notificationToDelete != null)
-                {
-                    UIApplication.SharedApplication.ScheduledLocalNotifications = UIApplication.SharedApplication.ScheduledLocalNotifications.Where(n => n != notificationToDelete).ToArray();
-                }
-            }
+            UNUserNotificationCenter.Current.RemovePendingNotificationRequests(new[] { StringIdentifierFromInt(notificationId) });
         }
 
         public override void CancelAllLocalNotifications()
         {
-            UIApplication.SharedApplication.ScheduledLocalNotifications = new UILocalNotification[] { };
+            UNUserNotificationCenter.Current.RemoveAllPendingNotificationRequests();
         }
 
         protected override global::PushwooshSDK.DotNet.Core.PushNotificationSettings GetNotificationSettings()

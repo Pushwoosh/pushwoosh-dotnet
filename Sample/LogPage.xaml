@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Sample"
+             x:Class="Sample.LogPage"
+             Style="{StaticResource PwPage}"
+             Title="Log">
+
+    <Grid RowDefinitions="Auto,*" Padding="20,16,20,0" RowSpacing="12">
+
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+            <Label Grid.Column="0" Text="SDK events" Style="{StaticResource PwTitle}"
+                   VerticalOptions="Center" />
+            <Button Grid.Column="1" Text="Clear"
+                    Style="{StaticResource PwQuietButton}"
+                    Clicked="OnClear"
+                    VerticalOptions="Center" />
+        </Grid>
+
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{x:Static local:EventLog.Entries}"
+                        ItemSizingStrategy="MeasureAllItems">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="0,48" Spacing="8">
+                    <Label Text="Nothing yet"
+                           Style="{StaticResource PwCardTitle}"
+                           HorizontalOptions="Center" />
+                    <Label Text="Register the device or send a tag, and events will appear here."
+                           Style="{StaticResource PwBody}"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="local:LogEntry">
+                    <Border Style="{StaticResource PwCard}" Padding="14" Margin="0,0,0,10">
+                        <Grid ColumnDefinitions="3,*" ColumnSpacing="12">
+
+                            <!-- The rail carries the event kind; coral means an inbound push. -->
+                            <BoxView Grid.Column="0"
+                                     Color="{Binding Accent}"
+                                     CornerRadius="2"
+                                     WidthRequest="3" />
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Badge}"
+                                           FontFamily="{StaticResource PwMono}"
+                                           FontSize="10"
+                                           TextColor="{Binding Accent}" />
+                                    <Label Grid.Column="2"
+                                           Text="{Binding Time}"
+                                           FontFamily="{StaticResource PwMono}"
+                                           FontSize="10"
+                                           TextColor="{StaticResource PwInkSoft}" />
+                                </Grid>
+
+                                <Label Text="{Binding Title}"
+                                       Style="{StaticResource PwCardTitle}"
+                                       FontSize="14" />
+
+                                <Label Text="{Binding Detail}"
+                                       IsVisible="{Binding HasDetail}"
+                                       FontFamily="{StaticResource PwMono}"
+                                       FontSize="11"
+                                       TextColor="{StaticResource PwInkSoft}"
+                                       LineBreakMode="CharacterWrap"
+                                       MaxLines="6" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>

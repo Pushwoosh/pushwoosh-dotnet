@@ -16,11 +16,37 @@ namespace PushwooshSDK.DotNet.Core
 		/// </summary>
         public event EventHandler<PushNotificationEventArgs>? PushAccepted;
 		/// <summary>
-		/// Occurs when application successfuly registered for push notifications
+		/// Occurs when application successfuly registered for push notifications.
+		/// <para>
+		/// The two platforms differ, and the difference is not going away — code against the weaker
+		/// of the two guarantees:
+		/// </para>
+		/// <para>
+		/// <b>Android</b> — raised only for registrations started through <see cref="Register"/>; an
+		/// implicit FCM token refresh does not raise it. Not a guaranteed completion signal either:
+		/// the native SDK can defer or drop a registration without reporting anything, so never
+		/// block the UI waiting for one.
+		/// </para>
+		/// <para>
+		/// <b>iOS</b> — raised whenever the app forwards a registration outcome to the SDK, which
+		/// includes re-registrations the native SDK starts on its own, with no
+		/// <see cref="Register"/> call behind them. Expect it to fire more than once per app run
+		/// and without a preceding <see cref="Register"/>.
+		/// </para>
 		/// </summary>
 		public event EventHandler? Registered;
 		/// <summary>
-		/// Occurs when application failed to register for push notifications
+		/// Occurs when application failed to register for push notifications.
+		/// Platform differences are the same as for <see cref="Registered"/>.
+		/// <para>
+		/// On Android this can arrive <b>synchronously, before <see cref="Register"/> returns</b>,
+		/// on whichever thread called it — that is the path taken when the native SDK is not
+		/// initialised yet or when communication with Pushwoosh is disabled. A registration that
+		/// actually reached the network reports back on the Android main thread instead. So a
+		/// handler must be safe to run on an arbitrary thread, and must not assume
+		/// <see cref="Register"/> has already returned. Exceptions thrown out of a handler on the
+		/// synchronous path are swallowed and logged by the native SDK, not surfaced here.
+		/// </para>
 		/// </summary>
         public event EventHandler<PushwooshError>? RegisterError;
 
@@ -57,14 +83,6 @@ namespace PushwooshSDK.DotNet.Core
 		/// Get tags from server
 		/// </summary>
 		public abstract Task<RequestResult<TagsBundle>> LoadTagsAsync();
-		/// <summary>
-		/// Sends In-App purchase statistics.Purchase information is stored in "In-app Product", "In-app Purchase" and "Last In-app Purchase date" default tags.
-		/// </summary>
-		/// <param name="identifier">purchased product ID</param>
-		/// <param name="price">price for the product</param>
-		/// <param name="currency">currency of the price (ex: "USD")</param>
-        public abstract void SendPurchaseData(string identifier, decimal price, string currency);
-
 		/// <summary>
 		/// Register for push notifications
 		/// </summary>

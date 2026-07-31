@@ -1,0 +1,119 @@
+# Publishes both packages to nuget.org with Trusted Publishing (OIDC), so no
+# long-lived NUGET_API_KEY exists anywhere. nuget.org only supports GitHub
+# Actions as an OIDC provider — GitLab is not supported — which is why this one
+# step lives here while everything else stays in GitLab CI.
+#
+# This job does NOT build. The .nupkg files are produced by the GitLab pipeline
+# on the tag, verified there by verify-packages and install-test, and attached to
+# this release by tools/github-create-release.bash. Rebuilding them here would
+# publish a binary that no check ever saw — a different runner, a different Xcode
+# and a different SDK patch produce a different assembly.
+#
+# The trusted publishing policy on nuget.org is bound to this file name (cd.yml)
+# and to the Pushwoosh/pushwoosh-dotnet repository. Renaming or moving this file
+# breaks publishing until the policy is updated.
+#
+# Note for maintainers: this file is generated. It lives in the GitLab repo at
+# public/.github/workflows/cd.yml and is copied into the mirror by
+# create-public-sdk-dir.bash — edits made directly in the mirror are wiped by the
+# next release.
+name: Publish to NuGet
+
+on:
+  release:
+    types: [published]
+  # Manual re-run, for when the release exists but the push failed.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to publish, e.g. 2.0.0"
+        required: true
+
+permissions:
+  id-token: write # required: this is what nuget.org validates
+  contents: read # to download the release assets
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest # downloads and pushes only, no build toolchain needed
+    steps:
+      - name: Resolve the tag
+        id: tag
+        run: |
+          tag="${{ github.event.release.tag_name || inputs.tag }}"
+          if [[ -z "$tag" ]]; then
+            echo "::error::no tag: neither release.tag_name nor the tag input is set"
+            exit 1
+          fi
+          if [[ ! "$tag" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::tag '$tag' is not X.Y.Z — refusing to publish"
+            exit 1
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "Publishing $tag"
+
+      - name: Download the packages built by the GitLab pipeline
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.tag.outputs.tag }}
+        run: |
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" \
+            --pattern '*.nupkg' --dir artifacts
+          ls -l artifacts
+
+      # The release is created before the assets finish uploading, and a failed
+      # upload leaves a release with one package or none. Publishing half a
+      # release to nuget.org is not recoverable, so both packages are required
+      # and each filename must carry the tag's version.
+      - name: Check both packages are present and match the tag
+        env:
+          TAG: ${{ steps.tag.outputs.tag }}
+        run: |
+          missing=0
+          for id in Pushwoosh.DotNet Pushwoosh.DotNet.Geozones; do
+            f="artifacts/${id}.${TAG}.nupkg"
+            if [[ -f "$f" ]]; then
+              echo "  OK      $(basename "$f")"
+            else
+              echo "::error::missing $(basename "$f") in the release assets"
+              missing=1
+            fi
+          done
+          # Anything else in the assets means the release carries a package this
+          # workflow was not told about; pushing it blind is how a stray build
+          # reaches nuget.org.
+          for f in artifacts/*.nupkg; do
+            base=$(basename "$f")
+            case "$base" in
+              Pushwoosh.DotNet.${TAG}.nupkg|Pushwoosh.DotNet.Geozones.${TAG}.nupkg) ;;
+              *) echo "::error::unexpected package in the release: $base"; missing=1 ;;
+            esac
+          done
+          [[ $missing -eq 0 ]]
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          # global.json in this repo pins the 8.0 band, and every dotnet command
+          # resolves against it — including `dotnet nuget push`.
+          dotnet-version: "8.0.x"
+
+      - name: NuGet login (OIDC to a short-lived key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          # Must be the nuget.org account that owns the packages, and it has to
+          # be a user, not an organization.
+          user: Pushwoosh
+
+      - name: Push to nuget.org
+        env:
+          TAG: ${{ steps.tag.outputs.tag }}
+        run: |
+          # --skip-duplicate so a re-run after a partial push is safe: the first
+          # package is already there and would otherwise fail the whole job.
+          dotnet nuget push "artifacts/*.nupkg" \
+            --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+          echo "Pushed $TAG to nuget.org"

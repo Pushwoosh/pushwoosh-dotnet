@@ -6,10 +6,16 @@
     <ImplicitUsings>true</ImplicitUsings>
     <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
   </PropertyGroup>
+
+  <!-- Entitlements.plist carries aps-environment, without which iOS never issues a
+       push token and this sample cannot register at all. The file was present but
+       unreferenced, which is the same as not having it. -->
+  <PropertyGroup>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CreatePackage>false</CreatePackage>
     <CodesignProvision>Automatic</CodesignProvision>
-    <CodesignKey>Apple Development: Vitaly Romanychev (5UYT3NK68B)</CodesignKey>
     <RuntimeIdentifier Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' != 'arm64'">ios-x64</RuntimeIdentifier>
     <RuntimeIdentifier Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'arm64'">ios-arm64</RuntimeIdentifier> 
   </PropertyGroup>

@@ -150,13 +150,6 @@ namespace Com.Pushwoosh.iOS
         [Export("sendBadges:")]
         void SendBadges(nint badge);
 
-        // -(void)sendSKPaymentTransactions:(NSArray *)transactions;
-        [Export("sendSKPaymentTransactions:")]
-        void SendSKPaymentTransactions(NSArray transactions);
-
-        // -(void)sendPurchase:(NSString *)productIdentifier withPrice:(NSDecimalNumber *)price currencyCode:(NSString *)currencyCode andDate:(NSDate *)date;
-        [Export("sendPurchase:withPrice:currencyCode:andDate:")]
-        void SendPurchase(NSString productIdentifier, NSDecimalNumber price, NSString currencyCode, NSDate date);
 
         // -(NSString *)getPushToken;
         [Export("getPushToken")]
@@ -305,7 +298,9 @@ namespace Com.Pushwoosh.iOS
         string Message { get; }
 
         // @required @property (readonly, nonatomic) NSDate * sendDate;
+        // PWInbox.h has no NS_ASSUME_NONNULL, so this really can be nil.
         [Abstract]
+        [NullAllowed]
         [Export("sendDate")]
         NSDate SendDate { get; }
 
@@ -330,7 +325,9 @@ namespace Com.Pushwoosh.iOS
         string AttachmentUrl { get; }
 
         // @required @property (readonly, nonatomic) NSDictionary * actionParams;
+        // nil whenever the message carries no action_params, or an unparseable one.
         [Abstract]
+        [NullAllowed]
         [Export("actionParams")]
         NSDictionary ActionParams { get; }
     }

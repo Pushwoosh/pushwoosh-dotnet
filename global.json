@@ -1,0 +1,7 @@
+{
+  "//": "Keeps the build on a .NET 8 SDK. Directory.Build.props silences NETSDK1202, but a 9.x or 10.x SDK still resolves plain net8.0-android to android21.0 and then fails with NU1202 against the AndroidX 34 packages. rollForward latestFeature takes the newest 8.x that is installed — never a 9 or 10 — so this does not break a machine or a runner on a different 8.0.x patch.",
+  "sdk": {
+    "version": "8.0.100",
+    "rollForward": "latestFeature"
+  }
+}

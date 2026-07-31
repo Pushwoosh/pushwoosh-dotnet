@@ -1,15 +1,27 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="Sample.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Sample"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="{StaticResource PwSurface}"
+    Shell.TabBarForegroundColor="{StaticResource PwIndigo}"
+    Shell.TabBarUnselectedColor="{StaticResource PwInkSoft}"
+    Shell.TabBarTitleColor="{StaticResource PwIndigo}"
+    Shell.BackgroundColor="{StaticResource PwSurface}"
+    Shell.ForegroundColor="{StaticResource PwInk}"
+    Shell.TitleColor="{StaticResource PwInk}">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent Title="Device" Icon="tab_device.png"
+                      ContentTemplate="{DataTemplate local:DevicePage}" Route="device" />
+        <ShellContent Title="Actions" Icon="tab_actions.png"
+                      ContentTemplate="{DataTemplate local:ActionsPage}" Route="actions" />
+        <ShellContent Title="Inbox" Icon="tab_inbox.png"
+                      ContentTemplate="{DataTemplate local:InboxPage}" Route="inbox" />
+        <ShellContent Title="Log" Icon="tab_log.png"
+                      ContentTemplate="{DataTemplate local:LogPage}" Route="log" />
+    </TabBar>
 
 </Shell>
-

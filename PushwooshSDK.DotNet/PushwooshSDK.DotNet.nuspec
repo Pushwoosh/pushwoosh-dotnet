@@ -2,23 +2,27 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Pushwoosh.DotNet</id>
-        <version>1.0.6</version>
+        <version>2.0.0</version>
         <title>Pushwoosh .Net SDK</title>
         <authors>Pushwoosh</authors>
         <owners>Pushwoosh</owners>
-        <licenseUrl>https://github.com/Pushwoosh/push-notifications-sdk/blob/master/LICENSE.txt</licenseUrl>
+        <license type="expression">MIT</license>
         <projectUrl>https://github.com/Pushwoosh/pushwoosh-dotnet</projectUrl>
-        <iconUrl>https://raw.githubusercontent.com/Pushwoosh/pushwoosh-xamarin/master/logo.png</iconUrl>
+        <icon>pushwoosh.png</icon>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <readme>README.md</readme>
         <description>Pushwoosh SDK for .Net</description>
         <tags>MAUI, .Net, DotNet , pushwoosh, push</tags>
         <dependencies>
-            <group targetFramework="net7.0">
+            <group targetFramework="net8.0">
             </group>
-            <group targetFramework="net7.0-android33.0">
-              <dependency id="Xamarin.AndroidX.Core" version="1.12.0.4" />
-              <dependency id="Xamarin.AndroidX.Arch.Core.Common" version="2.2.0.7" />
-              <dependency id="Xamarin.AndroidX.Arch.Core.Runtime" version="2.2.0.7" />
+            <group targetFramework="net8.0-android34.0">
+              <dependency id="Xamarin.AndroidX.Core" version="1.13.1.2" />
+              <dependency id="Xamarin.AndroidX.WebKit" version="1.10.0.2" />
+              <dependency id="Xamarin.AndroidX.RecyclerView" version="1.3.2.5" />
+              <dependency id="Xamarin.Google.Android.Material" version="1.10.0.3" />
+              <dependency id="Xamarin.AndroidX.Arch.Core.Common" version="2.2.0.10" />
+              <dependency id="Xamarin.AndroidX.Arch.Core.Runtime" version="2.2.0.10" />
               <dependency id="Xamarin.AndroidX.Activity" version="1.8.2.1" />
               <dependency id="Xamarin.AndroidX.Fragment" version="1.6.2.2" />              
               <dependency id="Xamarin.AndroidX.Work.Runtime" version="2.9.0.1" />
@@ -31,45 +35,58 @@
               <dependency id="Xamarin.GooglePlayServices.Base" version="118.2.0.5" />
               <dependency id="Xamarin.GooglePlayServices.CloudMessaging" version="117.1.0" />
               <dependency id="Xamarin.AndroidX.SwipeRefreshLayout" version="1.1.0.18" />
+              <!-- pushwoosh-inbox-ui needs Glide: GlideUtils, AttachmentActivity and
+                   InboxViewHolder call into com.bumptech.glide (verified with javap on the
+                   6.10.0 aar), and its POM declares [4.12.0, 4.16.99]. It was never declared
+                   here, so inbox attachments and images only worked because Microsoft.Maui.Core
+                   happens to pull Xamarin.Android.Glide transitively — a non-MAUI consumer got
+                   no Glide at all. 4.15.1.2 is exactly what Maui resolves to, so MAUI apps see
+                   no change in what they already have. -->
+              <dependency id="Xamarin.Android.Glide" version="4.15.1.2" />
               <dependency id="Xamarin.AndroidX.ConstraintLayout" version="2.1.4.10" />
             </group>
-            <group targetFramework="net7.0-ios10.0">
+            <group targetFramework="net8.0-ios11.0">
             </group>
         </dependencies>
       </metadata>
 
       <files>
+        <!-- Shown on the package page, and what makes nuget.org render anything at all. -->
+          <file src="../public/README.md" target="README.md" />
+          <file src="../public/pushwoosh.png" target="pushwoosh.png" />
+          <file src="../LICENSE" target="LICENSE" />
+
         <!--Core-->
-          <file src="bin/Debug/net7.0/PushwooshSDK.DotNet.Core.dll" target="lib/net7.0"/>
-          <file src="bin/Debug/net7.0/PushwooshSDK.DotNet.dll" target="lib/net7.0"/>
-          <file src="bin/Debug/net7.0/PushwooshSDK.DotNet.Core.pdb" target="lib/net7.0"/>
-          <file src="bin/Debug/net7.0/PushwooshSDK.DotNet.pdb" target="lib/net7.0"/>
+          <file src="bin/Release/net8.0/PushwooshSDK.DotNet.Core.dll" target="lib/net8.0"/>
+          <file src="bin/Release/net8.0/PushwooshSDK.DotNet.Core.xml" target="lib/net8.0" />
+          <file src="bin/Release/net8.0/PushwooshSDK.DotNet.dll" target="lib/net8.0"/>
+          <file src="bin/Release/net8.0/PushwooshSDK.DotNet.xml" target="lib/net8.0" />
         <!--Android-->
-	      <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-badge_v6.7.14.aar" target="lib/net7.0-android33.0/pushwoosh-badge_v6.7.14.aar" />
-   	      <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-firebase_v6.7.14.aar" target="lib/net7.0-android33.0/pushwoosh-firebase_v6.7.14.aar" />
-    	  <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox-ui_v6.7.14.aar" target="lib/net7.0-android33.0/pushwoosh-inbox-ui_v6.7.14.aar" />
-    	  <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox_v6.7.14.aar" target="lib/net7.0-android33.0/pushwoosh-inbox_v6.7.14.aar" />
-   	      <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh_v6.7.14.aar" target="lib/net7.0-android33.0/pushwoosh_v6.7.14.aar" />
+	      <file src="../PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-badge_v6.10.0.aar" target="lib/net8.0-android34.0/pushwoosh-badge_v6.10.0.aar" />
+   	      <file src="../PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-firebase_v6.10.0.aar" target="lib/net8.0-android34.0/pushwoosh-firebase_v6.10.0.aar" />
+    	  <file src="../PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox-ui_v6.10.0.aar" target="lib/net8.0-android34.0/pushwoosh-inbox-ui_v6.10.0.aar" />
+    	  <file src="../PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh-inbox_v6.10.0.aar" target="lib/net8.0-android34.0/pushwoosh-inbox_v6.10.0.aar" />
+   	      <file src="../PushwooshSDK.DotNet.Android.Bindings/Jars/pushwoosh_v6.10.0.aar" target="lib/net8.0-android34.0/pushwoosh_v6.10.0.aar" />
 
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.dll" target="lib/net7.0-android33.0"/>
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Core.dll" target="lib/net7.0-android33.0" />
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Android.Bindings.dll" target="lib/net7.0-android33.0" />
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Android.Library.dll" target="lib/net7.0-android33.0" />
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.dll" target="lib/net8.0-android34.0"/>
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.xml" target="lib/net8.0-android34.0" />
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.Core.dll" target="lib/net8.0-android34.0" />
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.Core.xml" target="lib/net8.0-android34.0" />
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.Android.Bindings.dll" target="lib/net8.0-android34.0" />
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.Android.Bindings.xml" target="lib/net8.0-android34.0" />
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.Android.Library.dll" target="lib/net8.0-android34.0" />
+          <file src="bin/Release/net8.0-android/PushwooshSDK.DotNet.Android.Library.xml" target="lib/net8.0-android34.0" />
 
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.pdb" target="lib/net7.0-android33.0"/>
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Core.pdb" target="lib/net7.0-android33.0" />
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Android.Bindings.pdb" target="lib/net7.0-android33.0" />
-          <file src="bin/Debug/net7.0-android/PushwooshSDK.DotNet.Android.Library.pdb" target="lib/net7.0-android33.0" />
         <!--iOS-->
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.dll" target="lib/net7.0-ios10.0"/>
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Core.dll" target="lib/net7.0-ios10.0"/>
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.iOS.Bindings.dll" target="lib/net7.0-ios10.0"/>
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.iOS.Library.dll" target="lib/net7.0-ios10.0"/>
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.dll" target="lib/net8.0-ios11.0"/>
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.xml" target="lib/net8.0-ios11.0" />
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.Core.dll" target="lib/net8.0-ios11.0"/>
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.Core.xml" target="lib/net8.0-ios11.0" />
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.iOS.Bindings.dll" target="lib/net8.0-ios11.0"/>
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.iOS.Bindings.xml" target="lib/net8.0-ios11.0" />
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.iOS.Library.dll" target="lib/net8.0-ios11.0"/>
+          <file src="bin/Release/net8.0-ios/PushwooshSDK.DotNet.iOS.Library.xml" target="lib/net8.0-ios11.0" />
 
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.pdb" target="lib/net7.0-ios10.0"/>
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.Core.pdb" target="lib/net7.0-ios10.0"/>
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.iOS.Bindings.pdb" target="lib/net7.0-ios10.0"/>
-          <file src="bin/Debug/net7.0-ios/PushwooshSDK.DotNet.iOS.Library.pdb" target="lib/net7.0-ios10.0"/>
-          <file src="/Users/vromanychev/Desktop/projects/pushwoosh-dotnet/PushwooshSDK.DotNet.iOS.Bindings/bin/Debug/net7.0-ios/PushwooshSDK.DotNet.iOS.Bindings.resources.zip" target="lib/net7.0-ios10.0/PushwooshSDK.DotNet.iOS.Bindings.resources.zip" />
+          <file src="../PushwooshSDK.DotNet.iOS.Bindings/bin/Release/net8.0-ios/PushwooshSDK.DotNet.iOS.Bindings.resources.zip" target="lib/net8.0-ios11.0/PushwooshSDK.DotNet.iOS.Bindings.resources.zip" />
       </files>
 </package>

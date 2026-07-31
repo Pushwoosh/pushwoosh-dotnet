@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sample.ActionsPage"
+             Style="{StaticResource PwPage}"
+             Title="Actions">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,16,20,32" Spacing="16">
+
+            <Label Text="Every result lands in the Log tab." Style="{StaticResource PwBody}" />
+
+            <Border Style="{StaticResource PwCard}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Tags" Style="{StaticResource PwCardTitle}" />
+                    <Label Text="Tag names must already exist in the control panel. Lists are comma separated."
+                           Style="{StaticResource PwBody}" />
+
+                    <Border Style="{StaticResource PwField}">
+                        <Entry x:Name="TagNameEntry" Placeholder="Tag name" Style="{StaticResource PwEntry}" />
+                    </Border>
+                    <Border Style="{StaticResource PwField}">
+                        <Entry x:Name="TagValueEntry" Placeholder="Value" Style="{StaticResource PwEntry}" />
+                    </Border>
+
+                    <Label Text="SEND AS" Style="{StaticResource PwEyebrow}" />
+                    <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Center">
+                        <Button Text="String" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnSendString" />
+                        <Button Text="Integer" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnSendInteger" />
+                        <Button Text="Increment" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnSendIncrement" />
+                        <Button Text="List" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnSendList" />
+                    </FlexLayout>
+
+                    <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Center">
+                        <Button Text="Send batch" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnSendBatch" />
+                        <Button Text="Load tags" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnLoadTags" />
+                    </FlexLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource PwCard}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="User" Style="{StaticResource PwCardTitle}" />
+
+                    <Border Style="{StaticResource PwField}">
+                        <Entry x:Name="UserIdEntry" Placeholder="User id" Style="{StaticResource PwEntry}" />
+                    </Border>
+                    <Button Text="Set user id" Style="{StaticResource PwQuietButton}"
+                            Clicked="OnSetUserId" HorizontalOptions="Start" />
+
+                    <Label Text="MERGE TWO USERS" Style="{StaticResource PwEyebrow}" />
+                    <Border Style="{StaticResource PwField}">
+                        <Entry x:Name="OldUserEntry" Placeholder="Old user id" Style="{StaticResource PwEntry}" />
+                    </Border>
+                    <Border Style="{StaticResource PwField}">
+                        <Entry x:Name="NewUserEntry" Placeholder="New user id" Style="{StaticResource PwEntry}" />
+                    </Border>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="Keep the old user's data" Style="{StaticResource PwBody}"
+                               VerticalOptions="Center" />
+                        <Switch Grid.Column="1" x:Name="MergeSwitch" IsToggled="True"
+                                OnColor="{StaticResource PwIndigo}" />
+                    </Grid>
+                    <Button Text="Merge users" Style="{StaticResource PwQuietButton}"
+                            Clicked="OnMergeUsers" HorizontalOptions="Start" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource PwCard}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Events" Style="{StaticResource PwCardTitle}" />
+                    <Label Text="Posting an event is what triggers an in-app message."
+                           Style="{StaticResource PwBody}" />
+
+                    <Border Style="{StaticResource PwField}">
+                        <Entry x:Name="EventEntry" Placeholder="Event name" Text="test"
+                               Style="{StaticResource PwEntry}" />
+                    </Border>
+                    <Border Style="{StaticResource PwField}">
+                        <Entry x:Name="EventAttributesEntry" Placeholder="key=value, key2=value2"
+                               Style="{StaticResource PwEntry}" />
+                    </Border>
+                    <Button Text="Post event" Style="{StaticResource PwQuietButton}"
+                            Clicked="OnPostEvent" HorizontalOptions="Start" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource PwCard}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Local notifications" Style="{StaticResource PwCardTitle}" />
+                    <Label Text="Delivered by the device, without a round trip to the server."
+                           Style="{StaticResource PwBody}" />
+
+                    <Border Style="{StaticResource PwField}">
+                        <Entry x:Name="LocalTextEntry" Placeholder="Message"
+                               Text="Scheduled from the sample" Style="{StaticResource PwEntry}" />
+                    </Border>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Border Grid.Column="0" Style="{StaticResource PwField}">
+                            <Entry x:Name="DelayEntry" Placeholder="Delay, s" Text="10"
+                                   Keyboard="Numeric" Style="{StaticResource PwEntry}" />
+                        </Border>
+                        <Border Grid.Column="1" Style="{StaticResource PwField}">
+                            <Entry x:Name="LocalIdEntry" Placeholder="Id to cancel"
+                                   Keyboard="Numeric" Style="{StaticResource PwEntry}" />
+                        </Border>
+                    </Grid>
+
+                    <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Center">
+                        <Button Text="Schedule" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnScheduleLocal" />
+                        <Button Text="Cancel by id" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnCancelLocalById" />
+                        <Button Text="Cancel all" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnCancelLocal" />
+                    </FlexLayout>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

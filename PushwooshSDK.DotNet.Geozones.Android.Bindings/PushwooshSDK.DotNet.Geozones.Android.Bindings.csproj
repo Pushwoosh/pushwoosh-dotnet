@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-android</TargetFramework>
+    <TargetFramework>net8.0-android</TargetFramework>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
@@ -12,5 +12,41 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Jars\" />
+  </ItemGroup>
+  <!-- For class-parse, not for the runtime — same reason the core bindings carry their
+       own list. pushwoosh-location.aar refers to com.pushwoosh.internal.* and
+       com.pushwoosh.function.Callback (both in the core aar), to
+       com.google.android.gms.location.* and to androidx.core.app. Without these the
+       generator cannot resolve those types and silently drops what it cannot express:
+       PushwooshLocation.startLocationTracking(Callback<Void, LocationNotAvailableException>)
+       — the only overload that can report a failure — was never generated, so a .NET
+       caller had no way to learn that tracking did not start.
+
+       The ProjectReference is what makes that overload appear, and it has to be a project
+       reference rather than the core aar with Bind="false": Bind="false" only puts the aar on
+       the class-parse path, so the type resolves but has no managed counterpart the generator
+       can name in a signature. Measured — with Bind="false" the overload was still missing and
+       68 BG8605 warnings appeared instead; with the ProjectReference it is generated as
+       StartLocationTracking(global::Pushwoosh.Function.ICallback?).
+
+       The last three packages are there because a project reference also brings the core
+       project's Android resources, and aapt2 fails on the inbox-ui layouts without them
+       (APT2260, ConstraintLayout attributes not found). The rest mirror the core's list for
+       class-parse. Packaging is hand-written nuspec, so nothing here changes what a consumer
+       resolves — these are build inputs only. -->
+  <ItemGroup>
+    <ProjectReference Include="..\PushwooshSDK.DotNet.Android.Bindings\PushwooshSDK.DotNet.Android.Bindings.csproj" />
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.13.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.7" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.6.2.2" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.2.5" />
+    <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Work.Runtime" Version="2.9.0.1" />
+    <PackageReference Include="Xamarin.Firebase.Messaging" Version="123.3.1.1" />
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.9.23.3" />
+    <!-- aapt2 needs these for the core project's inbox-ui layouts -->
+    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.1.4.10" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.10.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.18" />
   </ItemGroup>
 </Project>

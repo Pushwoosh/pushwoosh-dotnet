@@ -1,0 +1,27 @@
+<Project>
+
+  <!-- Applies to every project in the tree, samples included. -->
+
+  <PropertyGroup>
+    <!-- The packages ship net8.0 on purpose: it is the minimum consumer bar, and raising
+         it drops everyone still on net8 (see CLAUDE.md). A .NET 9 or 10 SDK treats those
+         target frameworks as end-of-life and makes NETSDK1202 an *error*, so without this
+         the repo only builds on an 8.0.x SDK and every local build needs a throwaway
+         global.json. OneSignal's Directory.Build.props does the same thing for the same
+         reason. -->
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <CheckEolWorkloads>false</CheckEolWorkloads>
+    <NoWarn>$(NoWarn);NETSDK1202</NoWarn>
+  </PropertyGroup>
+
+  <!-- XML documentation next to the assemblies, so consumers get IntelliSense on the
+       public API instead of bare signatures. Braze and CleverTap both ship it; we did
+       not. CS1591 is off because the generator would otherwise demand a doc comment on
+       every public member of the auto-generated bindings — thousands of them, none
+       written by hand. -->
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+</Project>

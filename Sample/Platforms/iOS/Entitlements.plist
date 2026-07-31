@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Without aps-environment iOS never calls
+	     didRegisterForRemoteNotificationsWithDeviceToken, so the SDK gets no push
+	     token, PushToken stays empty and the Device tab correctly reports
+	     "Not registered". Use development here; a distribution build needs
+	     "production" and a matching provisioning profile. -->
+	<key>aps-environment</key>
+	<string>development</string>
+</dict>
+</plist>

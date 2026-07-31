@@ -31,18 +31,49 @@ namespace Pushwoosh.Android
                         {
                             foreach (var msg in messages)
                             {
-                                InboxMessage inboxMessage = new InboxMessage(msg.Message, msg.Title, (InboxMessageType)msg.Type.Code, msg.ActionParams, msg.BannerUrl, msg.ImageUrl, msg.Code, DateTime.Parse(msg.ISO8601SendDate), msg.IsActionPerformed, msg.IsRead);
-                                messagesList.Add(inboxMessage);
+                                // Per-message, because everything below comes from Java without
+                                // nullability guarantees, and the whole point is that one bad
+                                // message must not cost the caller the entire batch — which is what
+                                // the unguarded DateTime.Parse used to do, the same way iOS lost a
+                                // batch to a missing action_params.
+                                try
+                                {
+                                    messagesList.Add(MessageFromNative(msg));
+                                }
+                                catch (System.Exception)
+                                {
+                                    // Skip this one and keep the rest.
+                                }
                             }
                         }
                     }
-                    catch (System.InvalidCastException ex)
+                    catch (System.InvalidCastException)
                     {
                         //obj.Data.JavaCast<JavaList<IInboxMessage>> fails to cast empty lists to JavaList, and we cannot check native type of obj.Data so just catch exception and do nothing.
                     }
                     completion(messagesList, obj.Exception != null ? obj.Exception.ToString() : null);
                 }
             });
+        }
+
+        // com.pushwoosh.inbox.data.InboxMessage declares every getter as a plain Java type
+        // (checked with javap on pushwoosh-inbox 6.10.0), so getISO8601SendDate() and getType()
+        // can both come back null. DateTime.Parse on a null string throws
+        // ArgumentNullException, and on a malformed one FormatException — neither of which the
+        // outer InvalidCastException handler catches.
+        static InboxMessage MessageFromNative(IInboxMessage msg)
+        {
+            DateTime? sendDate = DateTime.TryParse(msg.ISO8601SendDate, out var parsed)
+                ? parsed
+                : null;
+
+            var type = msg.Type != null
+                ? (InboxMessageType)msg.Type.Code
+                : InboxMessageType.Plain;
+
+            return new InboxMessage(msg.Message, msg.Title, type, msg.ActionParams,
+                msg.BannerUrl, msg.ImageUrl, msg.Code, sendDate,
+                msg.IsActionPerformed, msg.IsRead);
         }
 
         public void UnreadMessagesCount(Action<int, string> completion)

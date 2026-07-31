@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-    </dict>
+<dict>
+	<!-- This file was an empty dict and the csproj did not reference it, so the
+	     native iOS sample could never register: without aps-environment iOS does
+	     not call didRegisterForRemoteNotificationsWithDeviceToken, and the
+	     PushDelegate in AppDelegate.cs never sees a token. Use development here; a
+	     distribution build needs "production" and a matching provisioning profile. -->
+	<key>aps-environment</key>
+	<string>development</string>
+</dict>
 </plist>

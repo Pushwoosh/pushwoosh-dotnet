@@ -19,7 +19,7 @@ public class AppDelegate : MauiUIApplicationDelegate
     public void DidReceiveRemoteNotification(UIKit.UIApplication application, NSDictionary userInfo, Action<UIKit.UIBackgroundFetchResult> completionHandler)
     {
         PushManager.Instance.ReceivedRemoteNotification(userInfo);
-        Console.WriteLine("Received PUSH SOOQA NAH");
+        Console.WriteLine($"Push received: {userInfo}");
     }
 
     [Export("application:didRegisterForRemoteNotificationsWithDeviceToken:")]

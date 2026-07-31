@@ -23,6 +23,15 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<!-- aps-environment lives in Entitlements.plist and is what makes iOS issue a
+	     push token at all; without it Register() can only ever fail, and a geozone
+	     has nothing to deliver to. Same wiring as Sample/. Applies to both
+	     configurations and to the simulator, which since iOS 16 does get a token
+	     when the entitlement is present. -->
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+	  <CodesignEntitlements>Platforms/iOS/Entitlements.plist</CodesignEntitlements>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
 	  <RuntimeIdentifier Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' != 'arm64'">ios-x64</RuntimeIdentifier>
@@ -68,8 +77,10 @@
 	  <GoogleServicesJson Include="Platforms\Android\google-services.json" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
-	  <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.1" />
-	  <PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.2" />
+	  <!-- 1.4.0.5 is the floor AndroidX.Core 1.13.1.2 and RecyclerView 1.3.2.5 pull in through
+	       the SDK; pinning lower here is a package downgrade and NU1605 fails the build. -->
+	  <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.5" />
+	  <PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.5" />
 	  <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="121.1.0" />
 	</ItemGroup>
 </Project>

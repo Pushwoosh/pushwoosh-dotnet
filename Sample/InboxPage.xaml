@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Sample"
+             xmlns:core="clr-namespace:PushwooshSDK.DotNet.Core;assembly=PushwooshSDK.DotNet.Core"
+             x:Class="Sample.InboxPage"
+             Style="{StaticResource PwPage}"
+             Title="Inbox">
+
+    <Grid RowDefinitions="Auto,*" Padding="20,16,20,0" RowSpacing="14">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="12">
+
+            <Border Style="{StaticResource PwCard}" Padding="16">
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                    <VerticalStackLayout Grid.Column="0" Spacing="4">
+                        <Label x:Name="TotalLabel" Text="—" Style="{StaticResource PwMonoValue}" FontSize="20" />
+                        <Label Text="TOTAL" Style="{StaticResource PwEyebrow}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label x:Name="UnreadLabel" Text="—" Style="{StaticResource PwMonoValue}" FontSize="20" />
+                        <Label Text="UNREAD" Style="{StaticResource PwEyebrow}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="2" Spacing="4">
+                        <Label x:Name="NoActionLabel" Text="—" Style="{StaticResource PwMonoValue}" FontSize="20" />
+                        <Label Text="NO ACTION" Style="{StaticResource PwEyebrow}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Center">
+                <Button Text="Load" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnLoad" />
+                <Button Text="Refresh counts" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnCounts" />
+                <Button Text="Read all" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnReadAll" />
+                <Button Text="Delete all" Style="{StaticResource PwQuietButton}" Margin="0,0,8,8" Clicked="OnDeleteAll" />
+            </FlexLayout>
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1"
+                        x:Name="MessagesView"
+                        ItemSizingStrategy="MeasureAllItems">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="0,40" Spacing="8">
+                    <Label Text="Inbox is empty" Style="{StaticResource PwCardTitle}" HorizontalOptions="Center" />
+                    <Label Text="Send a message from the control panel, then load the inbox."
+                           Style="{StaticResource PwBody}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="core:InboxMessage">
+                    <Border Style="{StaticResource PwCard}" Padding="14" Margin="0,0,0,10">
+                        <VerticalStackLayout Spacing="8">
+
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                <Label Grid.Column="0" Text="{Binding Title}"
+                                       Style="{StaticResource PwCardTitle}" FontSize="14" />
+                                <Label Grid.Column="1" Text="{Binding SendDate, StringFormat='{0:dd MMM HH:mm}'}"
+                                       FontFamily="{StaticResource PwMono}" FontSize="10"
+                                       TextColor="{StaticResource PwInkSoft}" />
+                            </Grid>
+
+                            <Label Text="{Binding Message}" Style="{StaticResource PwBody}" MaxLines="3" />
+
+                            <Label FontFamily="{StaticResource PwMono}" FontSize="10"
+                                   TextColor="{StaticResource PwInkSoft}"
+                                   Text="{Binding Code, StringFormat='code {0}'}" />
+
+                            <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Center">
+                                <Button Text="Read" Style="{StaticResource PwQuietButton}" FontSize="12"
+                                        HeightRequest="34" Margin="0,0,8,0" Clicked="OnReadOne" />
+                                <Button Text="Action" Style="{StaticResource PwQuietButton}" FontSize="12"
+                                        HeightRequest="34" Margin="0,0,8,0" Clicked="OnPerformAction" />
+                                <Button Text="Delete" Style="{StaticResource PwQuietButton}" FontSize="12"
+                                        HeightRequest="34" Clicked="OnDeleteOne" />
+                            </FlexLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>

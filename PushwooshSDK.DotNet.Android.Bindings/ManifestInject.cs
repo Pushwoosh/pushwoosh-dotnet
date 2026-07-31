@@ -40,7 +40,14 @@ namespace Pushwoosh.Inbox
     [Register("com/pushwoosh/inbox/ui/model/customizing/formatter/InboxDateFormatter", DoNotGenerateAcw = true)]
     public interface IInboxDateFormatter : IJavaObject, IDisposable
     {
-        [Register("transform", "(Ljava/util/Date;)Ljava/lang/String;", "GetTransformHandler:Pushwoosh.Inbox.IInboxDateFormatterInvoker, Pushwoosh.Inbox.Droid.Bindings")]
+        // The assembly in a connector spec is resolved at runtime, and with marshal
+        // methods (on by default from .NET 9) also at build time in the consumer's
+        // app. It said Pushwoosh.Inbox.Droid.Bindings — the assembly name from the old
+        // Xamarin repo, which does not exist here; this one is
+        // PushwooshSDK.DotNet.Android.Bindings. Consumers were working around it with
+        // <AndroidEnableMarshalMethods>false</AndroidEnableMarshalMethods>, which
+        // disables the optimisation for their whole app, not just for this callback.
+        [Register("transform", "(Ljava/util/Date;)Ljava/lang/String;", "GetTransformHandler:Pushwoosh.Inbox.IInboxDateFormatterInvoker, PushwooshSDK.DotNet.Android.Bindings")]
         Java.Lang.String Transform(Java.Util.Date date);
     }
 

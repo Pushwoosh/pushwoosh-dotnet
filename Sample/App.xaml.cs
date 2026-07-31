@@ -1,24 +1,24 @@
-﻿namespace Sample;
-using PushwooshSDK.DotNet.Core;
+namespace Sample;
 
 public partial class App : Application
 {
 	public App()
 	{
 		InitializeComponent();
-		MainPage = new AppShell();
-    }
 
-    protected override void OnStart()
-    {
-        base.OnStart();
+		// Events go to the Log tab instead of interrupting with alerts.
+		EventLog.EnsureAttached();
 
-        PushManager.Instance.PushAccepted += (object sender, PushNotificationEventArgs e) => {
-            MainPage.DisplayAlert("Push Accepted", e.Notification.Payload, "OK");
-        };
-        PushManager.Instance.PushReceived += (object sender, PushNotificationEventArgs e) => {
-            MainPage.DisplayAlert("Push Received", e.Notification.Payload, "OK");
-        };
-    }
+		// No application code is baked into the sample, so ask for one once
+		// and keep it in preferences afterwards.
+		if (AppCodeStore.HasCode)
+		{
+			AppCodeStore.ApplySaved();
+			MainPage = new AppShell();
+		}
+		else
+		{
+			MainPage = new SetupPage();
+		}
+	}
 }
-

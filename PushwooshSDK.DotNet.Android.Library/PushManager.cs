@@ -43,14 +43,14 @@ namespace Pushwoosh.Android
         {
             public Action<Result>? ResultCallback { get; set; }
 
-            public void Process(Result result) => ResultCallback(result);
+            public void Process(Result result) => ResultCallback?.Invoke(result);
         }
 
         PushNotificationsManager nativeManager;
         public PushManager()
         {
             nativeManager = PushNotificationsManager.Instance;
-            InAppManager = new InAppManager(PushwooshInApp.Instance);
+            InAppManager = new InAppManager();
             InboxManager = new InboxManager();
         }
 
@@ -152,18 +152,39 @@ namespace Pushwoosh.Android
 
         public override void Register()
         {
-            nativeManager.RegisterForPushNotifications();
-        }
+            // The callback overload is what makes Registered/RegisterError fire: the
+            // no-argument one reports nothing back, so the managed layer stayed silent
+            // on Android while the native SDK registered fine.
+            nativeManager.RegisterForPushNotifications(new Callback()
+            {
+                ResultCallback = (Result result) =>
+                {
+                    // Held in a local because each access crosses JNI; the other call sites in
+                    // this class still read it twice, so this is a local choice, not a rule.
+                    var nativeError = result.Exception;
+                    if (nativeError == null)
+                    {
+                        OnRegistered();
+                        return;
+                    }
 
-        public override void SendPurchaseData(string identifier, decimal price, string currency)
-        {
-            nativeManager.SendInappPurchase(identifier, new Java.Math.BigDecimal(price.ToString(CultureInfo.InvariantCulture)), currency);
+                    // The ?? never fires — ErrorFromJavaException only returns null for a null
+                    // argument, and nativeError is non-null here. It is what convinces the
+                    // nullable analysis that OnRegisterError's non-nullable parameter is satisfied,
+                    // since the analysis cannot see through the call.
+                    OnRegisterError(ErrorFromJavaException(nativeError)
+                        ?? new PushwooshError { NativeError = nativeError });
+                }
+            });
         }
 
         public override Task<RequestResult> SendTagsAsync(TagsBundle tags)
         {
+            // Returning null from a Task-returning method makes the caller's await throw
+            // a NullReferenceException from inside the await machinery, with nothing in the
+            // stack pointing at the real mistake.
             if (tags == null)
-                return null;
+                throw new ArgumentNullException(nameof(tags));
             var source = new TaskCompletionSource<RequestResult>();
             var dict = tags.ToDictionary;
             Tags.TagsBundle.Builder tagsBundleBuilder = new Tags.TagsBundle.Builder();

@@ -1,19 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PushwooshSDK.DotNet.Core;
-using Pushwoosh.InApp;
 using Pushwoosh.Function;
 using Result = Pushwoosh.Function.Result;
+using NativeInAppManager = Pushwoosh.InApp.InAppManager;
 
 namespace Pushwoosh.Android
 {
     public class InAppManager : IInAppManager
     {
-        PushwooshInApp nativeManager;
-        public InAppManager(PushwooshInApp nativeManager) {
-            this.nativeManager = nativeManager;
-        }
+        // Android SDK 6.10.0 split the old PushwooshInApp: events stayed in the
+        // in-app manager, user identification moved to the main Pushwoosh class.
+        NativeInAppManager nativeInApp => NativeInAppManager.Instance;
+        PushNotificationsManager nativeManager => PushNotificationsManager.Instance;
 
         public Task<RequestResult> MergeUserId(string oldUserId, string newUserId, bool doMerge)
         {
@@ -35,7 +35,7 @@ namespace Pushwoosh.Android
                     tagsBundleBuilder.PutString(kv.Key, kv.Value);
                 }
             }
-            nativeManager.PostEvent(anEvent, tagsBundleBuilder.Build(), new PushManager.Callback() { ResultCallback = (Result result) => {
+            nativeInApp.PostEvent(anEvent, tagsBundleBuilder.Build(), new PushManager.Callback() { ResultCallback = (Result result) => {
                     taskSource.SetResult(new RequestResult() { Error = PushManager.ErrorFromJavaException(result.Exception) });
                 } });
 
