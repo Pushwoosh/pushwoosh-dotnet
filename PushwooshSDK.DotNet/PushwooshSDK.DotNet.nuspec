@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Pushwoosh.DotNet</id>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
         <title>Pushwoosh .Net SDK</title>
         <authors>Pushwoosh</authors>
         <owners>Pushwoosh</owners>
@@ -51,8 +51,14 @@
       </metadata>
 
       <files>
-        <!-- Shown on the package page, and what makes nuget.org render anything at all. -->
-          <file src="../public/README.md" target="README.md" />
+        <!-- Shown on the package page, and what makes nuget.org render anything at all.
+             A separate file from the GitHub README on purpose: nuget.org renders
+             CommonMark only and drops raw HTML on the floor, and it refuses images
+             that are not absolute URLs on its allow-list. The GitHub README opens
+             with an HTML centred header and a relative <img>, which came out as
+             visible markup on the 2.0.0 package page. pack.bash checks this file for
+             both mistakes now. -->
+          <file src="../public/README.nuget.md" target="README.md" />
           <file src="../public/pushwoosh.png" target="pushwoosh.png" />
           <file src="../LICENSE" target="LICENSE" />
 

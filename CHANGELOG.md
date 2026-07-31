@@ -3,6 +3,32 @@
 All notable changes to the Pushwoosh .NET MAUI SDK are documented here.
 The format is based on Keep a Changelog and this project adheres to Semantic Versioning.
 
+## 2.0.1
+
+Packaging only. The assemblies, the bundled native SDKs and the dependency graph are byte-for-byte
+what 2.0.0 shipped, so there is nothing to gain from upgrading unless you were reading the package
+page on nuget.org. No API changed, and no target framework or platform floor moved.
+
+### Packages
+- Pushwoosh.DotNet: 2.0.1
+- Pushwoosh.DotNet.Geozones: 2.0.1
+
+### Native SDKs
+- Android SDK: 6.10.0 (unchanged)
+- iOS SDK: 6.7.18 (unchanged)
+
+### Fixed
+
+- **The package page on nuget.org showed its header as raw markup** instead of a rendered one —
+  `<p align="center">`, the logo `<img>` and the badge block all appeared as literal text. The
+  packages carried the GitHub README, which opens with an HTML header; nuget.org renders CommonMark
+  only and does not support HTML. On top of that it renders images only from absolute URLs on its own
+  allow-list, so the logo bundled inside the package could never have appeared regardless of markup.
+  The packages now ship a readme written for nuget.org: CommonMark throughout, logo and badges from
+  allowed hosts, every link absolute. The README in the repository is unchanged.
+
+  2.0.0 keeps its broken page: nuget.org accepts a readme correction only as a new package version.
+
 ## 2.0.0
 
 Major. Both packages now share one version, and the minimum framework and platform floors move.
